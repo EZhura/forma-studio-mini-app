@@ -15,11 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectDetail = document.querySelector("#projectDetail");
   const projectDetailContent = document.querySelector("#projectDetailContent");
   const projectDetailBack = document.querySelector("#projectDetailBack");
+  const visualData = window.formaVisualDirection;
+  const atmosphereOptions = document.querySelector("#atmosphereOptions");
+  const contrastOptions = document.querySelector("#contrastOptions");
+  const materialOptions = document.querySelector("#materialOptions");
+  const visualResultButton = document.querySelector("#visualResultButton");
+  const visualResetButton = document.querySelector("#visualResetButton");
+  const visualResult = document.querySelector("#visualResult");
+  const visualResultImage = document.querySelector("#visualResultImage");
+  const visualResultTitle = document.querySelector("#visualResultTitle");
+  const visualResultDescription = document.querySelector("#visualResultDescription");
+  const visualResultAtmospheres = document.querySelector("#visualResultAtmospheres");
+  const visualResultMaterials = document.querySelector("#visualResultMaterials");
   const supportedLanguages = ["en", "es", "ru"];
   const languageLabels = { en: "EN", es: "ES", ru: "RU" };
   let currentLanguage = getSavedLanguage();
   let activeProjectId = null;
   let previousScrollPosition = 0;
+  let visualState = loadVisualState();
 
   function getSavedLanguage() {
     const saved = localStorage.getItem("formaLanguage");
@@ -45,6 +58,147 @@ document.addEventListener("DOMContentLoaded", () => {
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
+  }
+
+
+  function loadVisualState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem("formaVisualDirection") || "{}");
+      return {
+        atmospheres: Array.isArray(saved.atmospheres) ? saved.atmospheres : [],
+        contrasts: saved.contrasts && typeof saved.contrasts === "object" ? saved.contrasts : {},
+        materials: Array.isArray(saved.materials) ? saved.materials : [],
+        resultId: typeof saved.resultId === "string" ? saved.resultId : null
+      };
+    } catch {
+      return { atmospheres: [], contrasts: {}, materials: [], resultId: null };
+    }
+  }
+
+  function saveVisualState() {
+    localStorage.setItem("formaVisualDirection", JSON.stringify(visualState));
+  }
+
+  function getVisualLabel(item, language = currentLanguage) {
+    return item.labels[language] || item.labels.en;
+  }
+
+  function renderVisualBuilder(language) {
+    if (!visualData || !atmosphereOptions || !contrastOptions || !materialOptions) return;
+
+    atmosphereOptions.innerHTML = visualData.atmosphereItems.map((item) => {
+      const selected = visualState.atmospheres.includes(item.id);
+      return `
+        <button class="atmosphere-option${selected ? " is-selected" : ""}" type="button" data-atmosphere="${item.id}" aria-pressed="${selected}">
+          <span>${getVisualLabel(item, language)}</span><span aria-hidden="true">${selected ? "×" : "+"}</span>
+        </button>
+      `;
+    }).join("");
+
+    contrastOptions.innerHTML = visualData.contrastItems.map((pair) => `
+      <div class="contrast-pair">
+        ${pair.options.map((option) => {
+          const selected = visualState.contrasts[pair.id] === option.id;
+          return `
+            <button class="contrast-option${selected ? " is-selected" : ""}" type="button" data-contrast-pair="${pair.id}" data-contrast-option="${option.id}" aria-pressed="${selected}">
+              <img src="/static/images/${option.image}" alt="${escapeHtml(getVisualLabel(option, language))}" loading="lazy">
+              <span>${getVisualLabel(option, language)}</span>
+            </button>
+          `;
+        }).join("")}
+      </div>
+    `).join("");
+
+    materialOptions.innerHTML = visualData.materialItems.map((item) => {
+      const selected = visualState.materials.includes(item.id);
+      return `
+        <button class="material-option${selected ? " is-selected" : ""}" type="button" data-material="${item.id}" aria-pressed="${selected}">
+          <img src="/static/images/${item.image}" alt="${escapeHtml(getVisualLabel(item, language))}" loading="lazy">
+          <span>${getVisualLabel(item, language)}</span>
+        </button>
+      `;
+    }).join("");
+
+    if (visualState.resultId) renderVisualResult(language);
+  }
+
+  function addScores(target, score) {
+    Object.entries(score || {}).forEach(([key, value]) => {
+      target[key] = (target[key] || 0) + value;
+    });
+  }
+
+  function calculateVisualResult() {
+    const scores = {};
+
+    visualState.atmospheres.forEach((id) => {
+      const item = visualData.atmosphereItems.find((entry) => entry.id === id);
+      if (item) addScores(scores, item.score);
+    });
+
+    Object.entries(visualState.contrasts).forEach(([pairId, optionId]) => {
+      const pair = visualData.contrastItems.find((entry) => entry.id === pairId);
+      const option = pair?.options.find((entry) => entry.id === optionId);
+      if (option) addScores(scores, option.score);
+    });
+
+    visualState.materials.forEach((id) => {
+      const item = visualData.materialItems.find((entry) => entry.id === id);
+      if (item) addScores(scores, item.score);
+    });
+
+    let bestResult = visualData.results[0];
+    let bestScore = -1;
+
+    visualData.results.forEach((result) => {
+      const score = result.keys.reduce((total, key) => total + (scores[key] || 0), 0);
+      if (score > bestScore) {
+        bestResult = result;
+        bestScore = score;
+      }
+    });
+
+    return bestResult;
+  }
+
+  function renderVisualResult(language) {
+    const result = visualData.results.find((item) => item.id === visualState.resultId);
+    if (!result || !visualResult) return;
+
+    const atmosphereLabels = visualState.atmospheres
+      .map((id) => visualData.atmosphereItems.find((item) => item.id === id))
+      .filter(Boolean)
+      .map((item) => getVisualLabel(item, language));
+
+    const materialLabels = visualState.materials
+      .map((id) => visualData.materialItems.find((item) => item.id === id))
+      .filter(Boolean)
+      .map((item) => getVisualLabel(item, language));
+
+    visualResultTitle.textContent = result.titles[language] || result.titles.en;
+    visualResultDescription.textContent = result.descriptions[language] || result.descriptions.en;
+    visualResultAtmospheres.textContent = atmosphereLabels.join(" · ");
+    visualResultMaterials.textContent = materialLabels.join(" · ");
+    visualResultImage.style.backgroundImage = `url("/static/images/${result.image}")`;
+    visualResult.hidden = false;
+  }
+
+  function showVisualMessage() {
+    const existing = document.querySelector(".visual-builder__message");
+    if (existing) existing.remove();
+
+    const message = document.createElement("p");
+    message.className = "visual-builder__message";
+    message.textContent = getTranslation("visual.chooseMore");
+    visualResultButton.parentElement.insertAdjacentElement("beforebegin", message);
+  }
+
+  function resetVisualBuilder() {
+    visualState = { atmospheres: [], contrasts: {}, materials: [], resultId: null };
+    saveVisualState();
+    if (visualResult) visualResult.hidden = true;
+    document.querySelector(".visual-builder__message")?.remove();
+    renderVisualBuilder(currentLanguage);
   }
 
   function renderProjects(language) {
@@ -169,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     renderProjects(language);
+    renderVisualBuilder(language);
 
     if (activeProjectId) {
       const activeProject = projects.find((item) => item.id === activeProjectId);
@@ -224,6 +379,73 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   projectDetailBack.addEventListener("click", closeProjectDetail);
+
+  atmosphereOptions?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-atmosphere]");
+    if (!trigger) return;
+
+    const id = trigger.dataset.atmosphere;
+    if (visualState.atmospheres.includes(id)) {
+      visualState.atmospheres = visualState.atmospheres.filter((item) => item !== id);
+    } else if (visualState.atmospheres.length < 3) {
+      visualState.atmospheres.push(id);
+    }
+
+    visualState.resultId = null;
+    if (visualResult) visualResult.hidden = true;
+    saveVisualState();
+    renderVisualBuilder(currentLanguage);
+  });
+
+  contrastOptions?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-contrast-option]");
+    if (!trigger) return;
+
+    visualState.contrasts[trigger.dataset.contrastPair] = trigger.dataset.contrastOption;
+    visualState.resultId = null;
+    if (visualResult) visualResult.hidden = true;
+    saveVisualState();
+    renderVisualBuilder(currentLanguage);
+  });
+
+  materialOptions?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-material]");
+    if (!trigger) return;
+
+    const id = trigger.dataset.material;
+    if (visualState.materials.includes(id)) {
+      visualState.materials = visualState.materials.filter((item) => item !== id);
+    } else if (visualState.materials.length < 4) {
+      visualState.materials.push(id);
+    }
+
+    visualState.resultId = null;
+    if (visualResult) visualResult.hidden = true;
+    saveVisualState();
+    renderVisualBuilder(currentLanguage);
+  });
+
+  visualResultButton?.addEventListener("click", () => {
+    const hasAtmosphere = visualState.atmospheres.length > 0;
+    const hasContrast = Object.keys(visualState.contrasts).length > 0;
+    const hasMaterial = visualState.materials.length > 0;
+
+    document.querySelector(".visual-builder__message")?.remove();
+
+    if (!hasAtmosphere || !hasContrast || !hasMaterial) {
+      showVisualMessage();
+      return;
+    }
+
+    const result = calculateVisualResult();
+    visualState.resultId = result.id;
+    saveVisualState();
+    renderVisualResult(currentLanguage);
+    visualResult.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  visualResetButton?.addEventListener("click", resetVisualBuilder);
+
   document.addEventListener("click", closeLanguageMenu);
   menuToggle.addEventListener("click", openSiteMenu);
   menuClose.addEventListener("click", closeSiteMenu);

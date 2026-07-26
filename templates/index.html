@@ -87,7 +87,92 @@
         <div class="projects-list" id="projectsList"></div>
       </section>
 
-      <section class="placeholder-section" id="visual-direction"><p class="eyebrow">04 / VISUAL DIRECTION</p><h2>Find your visual direction</h2></section>
+      
+      <section class="visual-direction-section" id="visual-direction">
+        <div class="section-heading section-heading--light">
+          <div>
+            <p class="eyebrow" data-i18n="visual.eyebrow">04 / Visual Direction</p>
+            <h2 data-i18n="visual.title">Find your visual direction</h2>
+          </div>
+          <p class="section-heading__intro" data-i18n="visual.intro">
+            Choose the atmospheres, contrasts and materials that feel closest to your project.
+          </p>
+        </div>
+
+        <div class="visual-builder" id="visualBuilder">
+          <section class="visual-step" data-visual-step="1">
+            <div class="visual-step__heading">
+              <span>01</span>
+              <div>
+                <h3 data-i18n="visual.atmosphereTitle">Choose up to three atmospheres</h3>
+                <p data-i18n="visual.atmosphereHint">Select the words that best describe how the space should feel.</p>
+              </div>
+            </div>
+            <div class="atmosphere-grid" id="atmosphereOptions"></div>
+          </section>
+
+          <section class="visual-step" data-visual-step="2">
+            <div class="visual-step__heading">
+              <span>02</span>
+              <div>
+                <h3 data-i18n="visual.contrastTitle">Choose between visual contrasts</h3>
+                <p data-i18n="visual.contrastHint">There is no right answer — choose what feels more natural to you.</p>
+              </div>
+            </div>
+            <div class="contrast-grid" id="contrastOptions"></div>
+          </section>
+
+          <section class="visual-step" data-visual-step="3">
+            <div class="visual-step__heading">
+              <span>03</span>
+              <div>
+                <h3 data-i18n="visual.materialTitle">Select up to four materials</h3>
+                <p data-i18n="visual.materialHint">Choose the surfaces and finishes you would like to explore.</p>
+              </div>
+            </div>
+            <div class="materials-grid" id="materialOptions"></div>
+          </section>
+
+          <div class="visual-builder__actions">
+            <button class="button button--primary" id="visualResultButton" type="button">
+              <span data-i18n="visual.showResult">Show my direction</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <button class="visual-reset" id="visualResetButton" type="button" data-i18n="visual.reset">
+              Reset choices
+            </button>
+          </div>
+
+          <section class="visual-result" id="visualResult" hidden>
+            <div class="visual-result__image" id="visualResultImage"></div>
+            <div class="visual-result__content">
+              <p class="eyebrow" data-i18n="visual.resultEyebrow">Your visual direction</p>
+              <h3 id="visualResultTitle"></h3>
+              <p id="visualResultDescription"></p>
+
+              <div class="visual-result__summary">
+                <div>
+                  <span data-i18n="visual.summaryAtmosphere">Atmosphere</span>
+                  <p id="visualResultAtmospheres"></p>
+                </div>
+                <div>
+                  <span data-i18n="visual.summaryMaterials">Materials</span>
+                  <p id="visualResultMaterials"></p>
+                </div>
+              </div>
+
+              <p class="visual-result__note" data-i18n="visual.resultNote">
+                This direction will be saved and added to your project brief.
+              </p>
+
+              <a class="button button--secondary visual-result__cta" href="#brief">
+                <span data-i18n="visual.continueBrief">Continue to project brief</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
       <section class="placeholder-section" id="services"><p class="eyebrow">05 / SERVICES</p><h2>Choose the outcome</h2></section>
       <section class="placeholder-section" id="process"><p class="eyebrow">06 / PROCESS</p><h2>A clear process</h2></section>
       <section class="placeholder-section" id="brief"><p class="eyebrow">PROJECT DISCOVERY</p><h2>Build your project brief</h2></section>
@@ -119,6 +204,7 @@
 
   <script src="{{ url_for('static', filename='js/translations.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/projects.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/visual-direction.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
 </html>

@@ -365,7 +365,114 @@
         </div>
       </section>
 
-      <section class="placeholder-section" id="studio"><p class="eyebrow">07 / STUDIO</p><h2>FORMA Studio</h2></section>
+      
+      <section class="studio-section" id="studio">
+        <div class="studio-section__heading">
+          <div>
+            <p class="eyebrow" data-studio-text="eyebrow">10 / Studio</p>
+            <h2 data-studio-text="title">Interior architecture shaped by context</h2>
+          </div>
+
+          <p data-studio-text="intro">
+            FORMA Studio develops calm, precise interiors for homes, hospitality
+            and workspaces in Barcelona, Lisbon and beyond.
+          </p>
+        </div>
+
+        <div class="studio-editorial">
+          <figure class="studio-editorial__image">
+            <img
+              src="{{ url_for('static', filename='images/approach_detail.webp') }}"
+              alt="FORMA Studio interior architecture detail"
+              loading="lazy"
+            >
+          </figure>
+
+          <div class="studio-editorial__statement">
+            <p class="eyebrow" data-studio-text="approachEyebrow">Our approach</p>
+            <p data-studio-text="statement">
+              We begin with how a space is used, what already exists and what
+              genuinely needs to change. The result is not a stylistic formula,
+              but a coherent project grounded in light, material and everyday life.
+            </p>
+          </div>
+        </div>
+
+        <div class="studio-facts">
+          <article>
+            <span>01</span>
+            <h3 data-studio-text="factOneTitle">Context before style</h3>
+            <p data-studio-text="factOneText">
+              Architecture, location and daily routines define the direction.
+            </p>
+          </article>
+
+          <article>
+            <span>02</span>
+            <h3 data-studio-text="factTwoTitle">Materials with purpose</h3>
+            <p data-studio-text="factTwoText">
+              Each material is selected for atmosphere, durability and tactile quality.
+            </p>
+          </article>
+
+          <article>
+            <span>03</span>
+            <h3 data-studio-text="factThreeTitle">Clear project decisions</h3>
+            <p data-studio-text="factThreeText">
+              A structured process turns early ideas into coordinated design choices.
+            </p>
+          </article>
+
+          <article>
+            <span>04</span>
+            <h3 data-studio-text="factFourTitle">From direction to delivery</h3>
+            <p data-studio-text="factFourText">
+              Support can begin with one focused review or continue through implementation.
+            </p>
+          </article>
+        </div>
+
+        <div class="studio-profile">
+          <div>
+            <p class="eyebrow" data-studio-text="projectsEyebrow">Project types</p>
+            <p data-studio-text="projectTypes">
+              Residential · Hospitality · Retail · Workspaces
+            </p>
+          </div>
+
+          <div>
+            <p class="eyebrow" data-studio-text="locationEyebrow">Based in</p>
+            <p>Barcelona · Lisbon · Worldwide</p>
+          </div>
+
+          <div>
+            <p class="eyebrow" data-studio-text="formatEyebrow">Working format</p>
+            <p data-studio-text="formatText">
+              Local and remote collaboration
+            </p>
+          </div>
+        </div>
+
+        <div class="studio-cta">
+          <div>
+            <p class="eyebrow" data-studio-text="ctaEyebrow">Start with clarity</p>
+            <h3 data-studio-text="ctaTitle">Tell us what you are planning</h3>
+          </div>
+
+          <div class="studio-cta__actions">
+            <a class="button button--primary" href="#brief">
+              <span data-studio-text="briefButton">Build project brief</span>
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a class="studio-cta__secondary" href="#projects">
+              <span data-studio-text="projectsButton">View selected projects</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <section
@@ -399,6 +506,7 @@
   <script src="{{ url_for('static', filename='js/brief.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/recommendation.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/contact.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/studio.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
 </html>

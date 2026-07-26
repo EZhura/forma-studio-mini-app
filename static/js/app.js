@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectDetailContent = document.querySelector("#projectDetailContent");
   const projectDetailBack = document.querySelector("#projectDetailBack");
   const visualData = window.formaVisualDirection;
+  const services = window.formaServices;
+  const servicesList = document.querySelector("#servicesList");
   const atmosphereOptions = document.querySelector("#atmosphereOptions");
   const contrastOptions = document.querySelector("#contrastOptions");
   const materialOptions = document.querySelector("#materialOptions");
@@ -201,6 +203,68 @@ document.addEventListener("DOMContentLoaded", () => {
     renderVisualBuilder(currentLanguage);
   }
 
+
+  function renderServices(language) {
+    if (!servicesList || !Array.isArray(services)) return;
+
+    servicesList.innerHTML = services.map((service) => {
+      const content = service.translations[language] || service.translations.en;
+      const items = content.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+
+      return `
+        <article class="service-card" data-service-id="${service.id}">
+          <button class="service-card__summary" type="button" data-service-toggle="${service.id}" aria-expanded="false">
+            <span class="service-card__number">${service.number}</span>
+
+            <div class="service-card__heading">
+              <h3>${escapeHtml(content.title)}</h3>
+              <p>${escapeHtml(content.outcome)}</p>
+            </div>
+
+            <span class="service-card__action">
+              <span data-service-action-label>${getTranslation("services.open", language)}</span>
+              <span aria-hidden="true">+</span>
+            </span>
+          </button>
+
+          <div class="service-card__details" hidden>
+            <div class="service-card__image">
+              <img src="/static/images/${service.image}" alt="${escapeHtml(content.title)}" loading="lazy">
+            </div>
+
+            <div class="service-card__body">
+              <p>${escapeHtml(content.description)}</p>
+
+              <div class="service-card__included">
+                <p class="eyebrow">${getTranslation("services.included", language)}</p>
+                <ul>${items}</ul>
+              </div>
+
+              <a class="text-link" href="#brief">${getTranslation("global.primaryCta", language)}</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  function toggleServiceCard(serviceId) {
+    const card = servicesList?.querySelector(`[data-service-id="${serviceId}"]`);
+    if (!card) return;
+
+    const summary = card.querySelector("[data-service-toggle]");
+    const details = card.querySelector(".service-card__details");
+    const label = card.querySelector("[data-service-action-label]");
+    const icon = card.querySelector(".service-card__action span:last-child");
+    const isOpen = summary.getAttribute("aria-expanded") === "true";
+
+    summary.setAttribute("aria-expanded", String(!isOpen));
+    details.hidden = isOpen;
+    card.classList.toggle("is-open", !isOpen);
+    label.textContent = getTranslation(isOpen ? "services.open" : "services.close");
+    icon.textContent = isOpen ? "+" : "−";
+  }
+
   function renderProjects(language) {
     if (!projectsList || !Array.isArray(projects)) return;
 
@@ -324,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderProjects(language);
     renderVisualBuilder(language);
+    renderServices(language);
 
     if (activeProjectId) {
       const activeProject = projects.find((item) => item.id === activeProjectId);
@@ -379,6 +444,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   projectDetailBack.addEventListener("click", closeProjectDetail);
+
+
+  servicesList?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-service-toggle]");
+    if (trigger) toggleServiceCard(trigger.dataset.serviceToggle);
+  });
 
   atmosphereOptions?.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-atmosphere]");

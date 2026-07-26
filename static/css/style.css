@@ -235,6 +235,9 @@ img {
 .site-menu__links a {
     display: grid;
     padding: 14px 0;
+    grid-template-columns: 44px 1fr;
+    align-items: baseline;
+    border-bottom: 1px solid var(--color-line)
 }
 
 .site-menu__links a span:first-child {
@@ -245,7 +248,7 @@ img {
 .site-menu__links a span:last-child {
     font-family: var(--font-serif);
     font-size: clamp(22px, 3.8vw, 38px);
-    line-height: 1.08;
+    line-height: 1.08
 }
 
 .site-menu__footer {
@@ -436,6 +439,12 @@ img {
     line-height: .98
 }
 
+.services-section .section-heading h2 {
+    max-width: 680px;
+    font-size: clamp(42px, 6vw, 68px);
+    line-height: 1.02;
+}
+
 .section-heading__intro {
     max-width: 520px;
     margin: 0;
@@ -592,7 +601,7 @@ img {
     }
 
     .site-menu__links a span:last-child {
-        font-size: clamp(30px, 3.4vw, 48px);
+        font-size: clamp(30px, 3.4vw, 48px)
     }
 
     .hero__main {
@@ -1240,5 +1249,173 @@ body.detail-open {
 
     .visual-result__content {
         padding: 70px 54px;
+    }
+}
+
+
+/* Services */
+
+.services-section {
+    padding: 108px var(--page-padding) 120px;
+    background: var(--color-graphite);
+}
+
+.services-list {
+    padding-top: 58px;
+}
+
+.service-card {
+    border-top: 1px solid var(--color-line);
+}
+
+.service-card:last-child {
+    border-bottom: 1px solid var(--color-line);
+}
+
+.service-card__summary {
+    display: grid;
+    width: 100%;
+    padding: 26px 0;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 16px;
+    border: 0;
+    color: var(--color-limestone);
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.service-card__number {
+    padding-top: 7px;
+    color: var(--color-terracotta);
+    font-size: 10px;
+    letter-spacing: .12em;
+}
+
+.service-card__heading h3 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(30px, 6vw, 54px);
+    font-weight: 400;
+    line-height: 1.05;
+}
+
+.service-card__heading p {
+    max-width: 760px;
+    margin: 15px 0 0;
+    color: rgba(232, 227, 218, .72);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.service-card__action {
+    display: flex;
+    margin-top: 20px;
+    grid-column: 2;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--color-stone-grey);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.service-card__action span:last-child {
+    color: var(--color-terracotta);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.service-card__details {
+    display: grid;
+    gap: 30px;
+    padding: 6px 0 42px 58px;
+}
+
+.service-card__details[hidden] {
+    display: none;
+}
+
+.service-card__image {
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: #22221f;
+}
+
+.service-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-card__body>p {
+    max-width: 680px;
+    margin: 0;
+    color: rgba(232, 227, 218, .82);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.service-card__included {
+    margin-top: 30px;
+}
+
+.service-card__included ul {
+    margin: 20px 0 28px;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-line);
+}
+
+.service-card__included li {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--color-line);
+    color: rgba(232, 227, 218, .82);
+    font-size: 13px;
+}
+
+.services-cta {
+    display: grid;
+    gap: 28px;
+    margin-top: 78px;
+    padding: 50px 0 0;
+    border-top: 1px solid var(--color-line);
+}
+
+.services-cta p {
+    max-width: 680px;
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(32px, 6vw, 58px);
+    line-height: 1.08;
+}
+
+.services-cta .button {
+    width: min(100%, 310px);
+}
+
+@media (min-width: 760px) {
+    .service-card__summary {
+        padding: 34px 0;
+        grid-template-columns: 60px minmax(0, 1fr) 170px;
+        align-items: start;
+    }
+
+    .service-card__action {
+        margin-top: 8px;
+        grid-column: 3;
+    }
+
+    .service-card__details {
+        grid-template-columns: minmax(0, .9fr) minmax(340px, 1.1fr);
+        padding-left: 60px;
+        padding-bottom: 58px;
+    }
+
+    .services-cta {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
     }
 }

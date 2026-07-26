@@ -26,6 +26,16 @@ window.formaTranslations = {
       continueBrief: "Continue to project brief",
       chooseMore: "Choose at least one atmosphere, one visual contrast and one material."
     },
+    services: {
+      eyebrow: "05 / Services",
+      title: "Choose the outcome",
+      intro: "Start with what you need to achieve. We will define the right level of support around your project.",
+      included: "What this can include",
+      open: "View details",
+      close: "Close details",
+      ctaText: "Not sure which service fits your project?",
+      ctaButton: "Build your brief"
+    },
     projects: { eyebrow: "03 / Selected Work", title: "Selected spaces", intro: "Residential and commercial interiors shaped by place, material and everyday use.", viewProject: "View project", back: "Back to projects", focus: "Project focus", similar: "Start a similar project" }
   },
   es: {
@@ -53,6 +63,16 @@ window.formaTranslations = {
       continueBrief: "Continuar con el briefing",
       chooseMore: "Elige al menos una atmósfera, un contraste visual y un material."
     },
+    services: {
+      eyebrow: "05 / Servicios",
+      title: "Elige el resultado",
+      intro: "Empieza por lo que necesitas conseguir. Definiremos el nivel de apoyo adecuado para tu proyecto.",
+      included: "Qué puede incluir",
+      open: "Ver detalles",
+      close: "Cerrar detalles",
+      ctaText: "¿No sabes qué servicio encaja con tu proyecto?",
+      ctaButton: "Crear tu briefing"
+    },
     projects: { eyebrow: "03 / Proyectos seleccionados", title: "Espacios seleccionados", intro: "Interiores residenciales y comerciales definidos por el contexto, los materiales y la forma en que se utilizan cada día.", viewProject: "Ver proyecto", back: "Volver a los proyectos", focus: "Aspectos principales", similar: "Hablar sobre un proyecto similar" }
   },
   ru: {
@@ -79,6 +99,16 @@ window.formaTranslations = {
       resultNote: "Это направление сохранится и будет добавлено в проектный бриф.",
       continueBrief: "Перейти к проектному брифу",
       chooseMore: "Выберите минимум одну характеристику, один визуальный контраст и один материал."
+    },
+    services: {
+      eyebrow: "05 / Услуги",
+      title: "Выберите нужный результат",
+      intro: "Начните с результата, который хотите получить. Мы определим подходящий объём поддержки для вашего проекта.",
+      included: "Что может входить",
+      open: "Подробнее",
+      close: "Свернуть",
+      ctaText: "Не уверены, какая услуга подходит вашему проекту?",
+      ctaButton: "Составить бриф"
     },
     projects: { eyebrow: "03 / Избранные проекты", title: "Избранные пространства", intro: "Жилые и коммерческие интерьеры, сформированные контекстом, материалами и повседневными сценариями.", viewProject: "Открыть проект", back: "Вернуться к проектам", focus: "Основные задачи", similar: "Обсудить похожий проект" }
   }

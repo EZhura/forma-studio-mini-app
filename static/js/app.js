@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectDetailBack = document.querySelector("#projectDetailBack");
   const visualData = window.formaVisualDirection;
   const services = window.formaServices;
+  const processSteps = window.formaProcess;
+  const processList = document.querySelector("#processList");
   const servicesList = document.querySelector("#servicesList");
   const atmosphereOptions = document.querySelector("#atmosphereOptions");
   const contrastOptions = document.querySelector("#contrastOptions");
@@ -204,6 +206,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+
+  function renderProcess(language){
+    if(!processList||!Array.isArray(processSteps))return;
+    processList.innerHTML=processSteps.map(step=>{const c=step.translations[language]||step.translations.en;return `
+      <article class="process-item" data-process-id="${step.id}">
+        <button class="process-item__summary" type="button" data-process-toggle="${step.id}" aria-expanded="false">
+          <span class="process-item__number">${step.number}</span>
+          <div class="process-item__heading"><h3>${escapeHtml(c.title)}</h3><p>${escapeHtml(c.question)}</p></div>
+          <span class="process-item__action"><span data-process-action-label>${getTranslation("process.open",language)}</span><span aria-hidden="true">+</span></span>
+        </button>
+        <div class="process-item__details" hidden><p>${escapeHtml(c.description)}</p><div class="process-item__result"><span>${getTranslation("process.deliverable",language)}</span><strong>${escapeHtml(c.result)}</strong></div></div>
+      </article>`}).join("");
+  }
+  function toggleProcessItem(id){const item=processList?.querySelector(`[data-process-id="${id}"]`);if(!item)return;const s=item.querySelector("[data-process-toggle]");const d=item.querySelector(".process-item__details");const l=item.querySelector("[data-process-action-label]");const i=item.querySelector(".process-item__action span:last-child");const open=s.getAttribute("aria-expanded")==="true";s.setAttribute("aria-expanded",String(!open));d.hidden=open;item.classList.toggle("is-open",!open);l.textContent=getTranslation(open?"process.open":"process.close");i.textContent=open?"+":"−";}
+
   function renderServices(language) {
     if (!servicesList || !Array.isArray(services)) return;
 
@@ -389,6 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProjects(language);
     renderVisualBuilder(language);
     renderServices(language);
+    renderProcess(language);
 
     if (activeProjectId) {
       const activeProject = projects.find((item) => item.id === activeProjectId);
@@ -445,6 +463,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   projectDetailBack.addEventListener("click", closeProjectDetail);
 
+
+  processList?.addEventListener("click",(event)=>{const t=event.target.closest("[data-process-toggle]");if(t)toggleProcessItem(t.dataset.processToggle);});
 
   servicesList?.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-service-toggle]");

@@ -198,7 +198,14 @@
           </a>
         </div>
       </section>
-      <section class="placeholder-section" id="process"><p class="eyebrow">06 / PROCESS</p><h2>A clear process</h2></section>
+      <section class="process-section" id="process">
+  <div class="section-heading section-heading--light">
+    <div><p class="eyebrow" data-i18n="process.eyebrow">06 / Process</p><h2 data-i18n="process.title">A clear process</h2></div>
+    <p class="section-heading__intro" data-i18n="process.intro">Each stage answers a different question and produces a clear next step.</p>
+  </div>
+  <div class="process-list" id="processList"></div>
+  <div class="process-note"><p data-i18n="process.note">The exact scope and sequence are adapted to the project, location and selected service.</p></div>
+</section>
       <section class="placeholder-section" id="brief"><p class="eyebrow">PROJECT DISCOVERY</p><h2>Build your project brief</h2></section>
       <section class="placeholder-section" id="studio"><p class="eyebrow">07 / STUDIO</p><h2>FORMA Studio</h2></section>
     </main>
@@ -230,6 +237,7 @@
   <script src="{{ url_for('static', filename='js/projects.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/visual-direction.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/services.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/process.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
 </html>

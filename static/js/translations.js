@@ -36,6 +36,7 @@ window.formaTranslations = {
       ctaText: "Not sure which service fits your project?",
       ctaButton: "Build your brief"
     },
+    process: { eyebrow: "06 / Process", title: "A clear process", intro: "Each stage answers a different question and produces a clear next step.", deliverable: "Result", open: "View stage", close: "Close stage", note: "The exact scope and sequence are adapted to the project, location and selected service." },
     projects: { eyebrow: "03 / Selected Work", title: "Selected spaces", intro: "Residential and commercial interiors shaped by place, material and everyday use.", viewProject: "View project", back: "Back to projects", focus: "Project focus", similar: "Start a similar project" }
   },
   es: {
@@ -73,6 +74,7 @@ window.formaTranslations = {
       ctaText: "¿No sabes qué servicio encaja con tu proyecto?",
       ctaButton: "Crear tu briefing"
     },
+    process: { eyebrow: "06 / Proceso", title: "Un proceso claro", intro: "Cada etapa responde a una pregunta diferente y genera un siguiente paso concreto.", deliverable: "Resultado", open: "Ver etapa", close: "Cerrar etapa", note: "El alcance y la secuencia exactos se adaptan al proyecto, la ubicación y el servicio seleccionado." },
     projects: { eyebrow: "03 / Proyectos seleccionados", title: "Espacios seleccionados", intro: "Interiores residenciales y comerciales definidos por el contexto, los materiales y la forma en que se utilizan cada día.", viewProject: "Ver proyecto", back: "Volver a los proyectos", focus: "Aspectos principales", similar: "Hablar sobre un proyecto similar" }
   },
   ru: {
@@ -110,6 +112,7 @@ window.formaTranslations = {
       ctaText: "Не уверены, какая услуга подходит вашему проекту?",
       ctaButton: "Составить бриф"
     },
+    process: { eyebrow: "06 / Процесс", title: "Понятный процесс", intro: "Каждый этап отвечает на отдельный вопрос и даёт ясный следующий шаг.", deliverable: "Результат", open: "Открыть этап", close: "Свернуть этап", note: "Точный объём и последовательность работ адаптируются под проект, локацию и выбранную услугу." },
     projects: { eyebrow: "03 / Избранные проекты", title: "Избранные пространства", intro: "Жилые и коммерческие интерьеры, сформированные контекстом, материалами и повседневными сценариями.", viewProject: "Открыть проект", back: "Вернуться к проектам", focus: "Основные задачи", similar: "Обсудить похожий проект" }
   }
 };

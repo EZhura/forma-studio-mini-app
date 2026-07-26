@@ -1,0 +1,87 @@
+{
+  "license": "Pexels License — free to use and modify. Attribution not required but recommended.",
+  "sources": [
+    {
+      "id": 7031402,
+      "author": "Max Vakhtbovych",
+      "url": "https://www.pexels.com/photo/interior-of-modern-house-with-kitchen-and-staircase-7031402/"
+    },
+    {
+      "id": 4872984,
+      "author": "Kei Scampa",
+      "url": "https://www.pexels.com/photo/interior-of-old-house-with-high-ceilings-4872984/"
+    },
+    {
+      "id": 30609234,
+      "author": "Jomin Thach",
+      "url": "https://www.pexels.com/photo/minimalist-office-design-with-natural-light-30609234/"
+    },
+    {
+      "id": 7031573,
+      "author": "Max Vakhtbovych",
+      "url": "https://www.pexels.com/photo/spacious-hall-in-modern-loft-style-house-7031573/"
+    },
+    {
+      "id": 4913317,
+      "author": "Maria Orlova",
+      "url": "https://www.pexels.com/photo/interior-of-cozy-elegant-apartment-with-big-window-and-classic-wooden-furniture-4913317/"
+    },
+    {
+      "id": 31199412,
+      "author": "pixelman Dapha",
+      "url": "https://www.pexels.com/photo/modern-mediterranean-interior-with-cozy-seating-area-31199412/"
+    },
+    {
+      "id": 17968360,
+      "author": "天宸 何",
+      "url": "https://www.pexels.com/photo/porch-in-a-luxury-villa-17968360/"
+    },
+    {
+      "id": 15666781,
+      "author": "Rahib Yaqubov",
+      "url": "https://www.pexels.com/photo/a-dining-room-in-mediterranean-style-15666781/"
+    }
+  ],
+  "files": [
+    "approach_detail.webp",
+    "atelier_cover.webp",
+    "atelier_detail.webp",
+    "atelier_meeting.webp",
+    "atelier_work.webp",
+    "casa_bruma_cover.webp",
+    "casa_bruma_detail.webp",
+    "casa_bruma_private.webp",
+    "casa_bruma_space.webp",
+    "category_hospitality.webp",
+    "category_residential.webp",
+    "category_workspace.webp",
+    "hero_main.webp",
+    "linha_cover.webp",
+    "linha_detail.webp",
+    "linha_joinery.webp",
+    "linha_space.webp",
+    "material_colour.webp",
+    "material_concrete.webp",
+    "material_dark.webp",
+    "material_linen.webp",
+    "material_metal.webp",
+    "material_plaster.webp",
+    "material_stone.webp",
+    "material_timber.webp",
+    "mood_atmospheric.webp",
+    "mood_cool.webp",
+    "mood_layered.webp",
+    "mood_light.webp",
+    "mood_minimal.webp",
+    "mood_soft.webp",
+    "mood_structured.webp",
+    "mood_warm.webp",
+    "noma_common.webp",
+    "noma_cover.webp",
+    "noma_detail.webp",
+    "noma_room.webp",
+    "process_background.webp",
+    "service_concept.webp",
+    "service_delivery.webp"
+  ]
+}

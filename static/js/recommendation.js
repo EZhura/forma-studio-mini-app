@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const scope = document.querySelector("#recommendationScope");
   const snapshot = document.querySelector("#recommendationSnapshot");
   const editButton = document.querySelector("#recommendationEdit");
+  const discussButton = document.querySelector("#recommendationDiscuss");
   const languageLabel = document.querySelector("#currentLanguage");
 
   if (!section || !serviceTitle || !reason || !scope || !snapshot) return;
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scope: "Likely scope",
       snapshot: "Project snapshot",
       edit: "Edit brief",
+      discuss: "Discuss project",
       note: "This is an initial recommendation, not a final proposal or cost estimate.",
       labels: {
         projectType: "Space",
@@ -84,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scope: "Alcance probable",
       snapshot: "Resumen del proyecto",
       edit: "Editar briefing",
+      discuss: "Hablar del proyecto",
       note: "Esta es una recomendación inicial, no una propuesta final ni una estimación de costes.",
       labels: {
         projectType: "Espacio",
@@ -148,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scope: "Предполагаемый состав работ",
       snapshot: "Кратко о проекте",
       edit: "Изменить бриф",
+      discuss: "Обсудить проект",
       note: "Это предварительная рекомендация, а не финальное предложение или расчёт стоимости.",
       labels: {
         projectType: "Пространство",
@@ -402,6 +406,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     section.hidden = false;
   }
+
+  discussButton?.addEventListener("click", () => {
+    document.querySelector("#contact")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
 
   editButton?.addEventListener("click", () => {
     document.querySelector("#brief")?.scrollIntoView({

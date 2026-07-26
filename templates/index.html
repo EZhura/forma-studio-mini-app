@@ -270,9 +270,16 @@
         <div class="recommendation-summary">
           <div class="recommendation-summary__heading">
             <p class="eyebrow" data-recommendation-text="snapshot">Project snapshot</p>
-            <button class="text-link" id="recommendationEdit" type="button">
-              <span data-recommendation-text="edit">Edit brief</span>
-            </button>
+            <div class="recommendation-actions">
+              <button class="button button--primary recommendation-actions__primary" id="recommendationDiscuss" type="button">
+                <span data-recommendation-text="discuss">Discuss project</span>
+                <span aria-hidden="true">→</span>
+              </button>
+              <button class="recommendation-actions__secondary" id="recommendationEdit" type="button">
+                <span data-recommendation-text="edit">Edit brief</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
           </div>
           <dl id="recommendationSnapshot"></dl>
         </div>
@@ -280,6 +287,82 @@
         <p class="recommendation-note" data-recommendation-text="note">
           This is an initial recommendation, not a final proposal or cost estimate.
         </p>
+      </section>
+
+      
+      <section class="contact-section" id="contact">
+        <div class="contact-section__heading">
+          <div>
+            <p class="eyebrow" data-contact-text="eyebrow">09 / Contact</p>
+            <h2 data-contact-text="title">Send your project brief</h2>
+          </div>
+          <p data-contact-text="intro">
+            Share your contact details. Your brief and recommendation will be attached automatically.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="contact-form__grid">
+              <label class="contact-field">
+                <span data-contact-text="name">Name</span>
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="email">Email</span>
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="phone">Phone or Telegram</span>
+                <input type="text" name="phone" autocomplete="tel">
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="contactMethod">Preferred contact method</span>
+                <select name="contactMethod" required>
+                  <option value="" data-contact-text="choose">Choose</option>
+                  <option value="email">Email</option>
+                  <option value="telegram">Telegram</option>
+                  <option value="whatsapp">WhatsApp</option>
+                </select>
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="language">Preferred language</span>
+                <select name="language" required>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="ru">Русский</option>
+                </select>
+              </label>
+
+              <label class="contact-field contact-field--wide">
+                <span data-contact-text="message">Anything else you would like to add?</span>
+                <textarea name="message" rows="5"></textarea>
+              </label>
+            </div>
+
+            <div class="contact-form__footer">
+              <p data-contact-text="privacy">
+                By sending this form, you agree that FORMA Studio may contact you about this project.
+              </p>
+
+              <button class="button button--primary" type="submit">
+                <span data-contact-text="submit">Send brief</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <p class="contact-form__status" id="contactStatus" hidden></p>
+          </form>
+
+          <aside class="contact-summary">
+            <p class="eyebrow" data-contact-text="summary">Attached to your request</p>
+            <dl id="contactSummary"></dl>
+          </aside>
+        </div>
       </section>
 
       <section class="placeholder-section" id="studio"><p class="eyebrow">07 / STUDIO</p><h2>FORMA Studio</h2></section>
@@ -315,6 +398,7 @@
   <script src="{{ url_for('static', filename='js/process.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/brief.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/recommendation.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/contact.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
 </html>

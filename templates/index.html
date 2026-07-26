@@ -1,224 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-    <meta name="theme-color" content="#181816">
-
-    <title>FORMA Studio</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#181816">
+  <title>FORMA Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-    <div class="app-shell">
-        <header class="site-header">
-            <a class="site-logo" href="#home" aria-label="FORMA Studio">
-                FORMA
-            </a>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="site-logo" href="#home" aria-label="FORMA Studio">FORMA</a>
+      <div class="header-actions">
+        <div class="language-selector">
+          <button class="language-selector__toggle" id="languageToggle" type="button" aria-expanded="false" aria-controls="languageMenu">
+            <span id="currentLanguage">EN</span><span class="language-selector__arrow" aria-hidden="true">↓</span>
+          </button>
+          <div class="language-selector__menu" id="languageMenu" hidden>
+            <p class="language-selector__label" data-i18n="language.label">Language</p>
+            <button class="language-option" type="button" data-language="en"><span>English</span><span>01</span></button>
+            <button class="language-option" type="button" data-language="es"><span>Español</span><span>02</span></button>
+            <button class="language-option" type="button" data-language="ru"><span>Русский</span><span>03</span></button>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteMenu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
 
-            <div class="header-actions">
-                <div class="language-selector">
-                    <button class="language-selector__toggle" id="languageToggle" type="button" aria-expanded="false"
-                        aria-controls="languageMenu">
-                        <span id="currentLanguage">EN</span>
-                        <span class="language-selector__arrow" aria-hidden="true">
-                            ↓
-                        </span>
-                    </button>
+    <nav class="site-menu" id="siteMenu" aria-hidden="true">
+      <div class="site-menu__inner">
+        <div class="site-menu__top">
+          <p class="site-menu__label" data-i18n="menu.label">Menu</p>
+          <button class="site-menu__close" id="menuClose" type="button" aria-label="Close menu">×</button>
+        </div>
+        <div class="site-menu__links">
+          <a href="#projects" data-menu-link><span>01</span><span data-i18n="nav.projects">Selected Work</span></a>
+          <a href="#visual-direction" data-menu-link><span>02</span><span data-i18n="nav.visual">Visual Direction</span></a>
+          <a href="#services" data-menu-link><span>03</span><span data-i18n="nav.services">Services</span></a>
+          <a href="#process" data-menu-link><span>04</span><span data-i18n="nav.process">Process</span></a>
+          <a href="#brief" data-menu-link><span>05</span><span data-i18n="nav.brief">Build Your Brief</span></a>
+          <a href="#studio" data-menu-link><span>06</span><span data-i18n="nav.studio">Studio</span></a>
+        </div>
+        <div class="site-menu__footer">
+          <p data-i18n="global.locations">Barcelona · Lisbon · Worldwide</p>
+          <a class="text-link" href="#brief" data-menu-link data-i18n="global.primaryCta">Build Your Project Brief</a>
+        </div>
+      </div>
+    </nav>
 
-                    <div class="language-selector__menu" id="languageMenu" hidden>
-                        <p class="language-selector__label" data-i18n="language.label">
-                            Language
-                        </p>
-
-                        <button class="language-option" type="button" data-language="en">
-                            <span>English</span>
-                            <span>01</span>
-                        </button>
-
-                        <button class="language-option" type="button" data-language="es">
-                            <span>Español</span>
-                            <span>02</span>
-                        </button>
-
-                        <button class="language-option" type="button" data-language="ru">
-                            <span>Русский</span>
-                            <span>03</span>
-                        </button>
-                    </div>
-                </div>
-
-                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
-                    aria-controls="siteMenu">
-                    <span></span>
-                    <span></span>
-                </button>
+    <main>
+      <section class="hero" id="home">
+        <div class="hero__background" aria-hidden="true"></div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__content">
+          <div class="hero__intro">
+            <p class="eyebrow" data-i18n="hero.eyebrow">Interior Architecture & Renovation</p>
+            <p class="hero__locations" data-i18n="global.locations">Barcelona · Lisbon · Worldwide</p>
+          </div>
+          <div class="hero__main">
+            <h1 data-i18n="hero.title">Spaces shaped around how you live.</h1>
+            <p class="hero__description" data-i18n="hero.description">We design residential and selected commercial interiors with a focus on space, materiality and everyday use.</p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#brief"><span data-i18n="global.primaryCta">Build Your Project Brief</span><span aria-hidden="true">→</span></a>
+              <a class="button button--secondary" href="#projects"><span data-i18n="global.secondaryCta">View Selected Work</span><span aria-hidden="true">↘</span></a>
             </div>
-        </header>
+          </div>
+          <div class="hero__footer">
+            <span>01</span><span class="hero__scroll" data-i18n="hero.scroll">Explore the studio</span>
+          </div>
+        </div>
+      </section>
 
-        <nav class="site-menu" id="siteMenu" aria-hidden="true">
-            <div class="site-menu__inner">
-                <div class="site-menu__top">
-                    <p class="site-menu__label" data-i18n="menu.label">
-                        Menu
-                    </p>
+      <section class="projects-section" id="projects">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="projects.eyebrow">03 / Selected Work</p>
+            <h2 data-i18n="projects.title">Selected spaces</h2>
+          </div>
+          <p class="section-heading__intro" data-i18n="projects.intro">Residential and commercial interiors shaped by place, material and everyday use.</p>
+        </div>
+        <div class="projects-list" id="projectsList"></div>
+      </section>
 
-                    <button class="site-menu__close" id="menuClose" type="button" aria-label="Close menu">
-                        ×
-                    </button>
-                </div>
+      <section class="placeholder-section" id="visual-direction"><p class="eyebrow">04 / VISUAL DIRECTION</p><h2>Find your visual direction</h2></section>
+      <section class="placeholder-section" id="services"><p class="eyebrow">05 / SERVICES</p><h2>Choose the outcome</h2></section>
+      <section class="placeholder-section" id="process"><p class="eyebrow">06 / PROCESS</p><h2>A clear process</h2></section>
+      <section class="placeholder-section" id="brief"><p class="eyebrow">PROJECT DISCOVERY</p><h2>Build your project brief</h2></section>
+      <section class="placeholder-section" id="studio"><p class="eyebrow">07 / STUDIO</p><h2>FORMA Studio</h2></section>
+    </main>
+  </div>
 
-                <div class="site-menu__links">
-                    <a href="#projects" data-menu-link>
-                        <span>01</span>
-                        <span data-i18n="nav.projects">Selected Work</span>
-                    </a>
-
-                    <a href="#visual-direction" data-menu-link>
-                        <span>02</span>
-                        <span data-i18n="nav.visual">Visual Direction</span>
-                    </a>
-
-                    <a href="#services" data-menu-link>
-                        <span>03</span>
-                        <span data-i18n="nav.services">Services</span>
-                    </a>
-
-                    <a href="#process" data-menu-link>
-                        <span>04</span>
-                        <span data-i18n="nav.process">Process</span>
-                    </a>
-
-                    <a href="#brief" data-menu-link>
-                        <span>05</span>
-                        <span data-i18n="nav.brief">Build Your Brief</span>
-                    </a>
-
-                    <a href="#studio" data-menu-link>
-                        <span>06</span>
-                        <span data-i18n="nav.studio">Studio</span>
-                    </a>
-                </div>
-
-                <div class="site-menu__footer">
-                    <p data-i18n="global.locations">
-                        Barcelona · Lisbon · Worldwide
-                    </p>
-
-                    <a class="text-link" href="#brief" data-menu-link data-i18n="global.primaryCta">
-                        Build Your Project Brief
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <main>
-            <section class="hero" id="home">
-                <div class="hero__background" aria-hidden="true"></div>
-
-                <div class="hero__overlay" aria-hidden="true"></div>
-
-                <div class="hero__content">
-                    <div class="hero__intro">
-                        <p class="eyebrow" data-i18n="hero.eyebrow">
-                            Interior Architecture & Renovation
-                        </p>
-
-                        <p class="hero__locations" data-i18n="global.locations">
-                            Barcelona · Lisbon · Worldwide
-                        </p>
-                    </div>
-
-                    <div class="hero__main">
-                        <h1 data-i18n="hero.title">
-                            Spaces shaped around how you live.
-                        </h1>
-
-                        <p class="hero__description" data-i18n="hero.description">
-                            We design residential and selected commercial
-                            interiors with a focus on space, materiality
-                            and everyday use.
-                        </p>
-
-                        <div class="hero__actions">
-                            <a class="button button--primary" href="#brief">
-                                <span data-i18n="global.primaryCta">
-                                    Build Your Project Brief
-                                </span>
-
-                                <span aria-hidden="true">→</span>
-                            </a>
-
-                            <a class="button button--secondary" href="#projects">
-                                <span data-i18n="global.secondaryCta">
-                                    View Selected Work
-                                </span>
-
-                                <span aria-hidden="true">↘</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="hero__footer">
-                        <span>01</span>
-
-                        <span class="hero__scroll" data-i18n="hero.scroll">
-                            Explore the studio
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="placeholder-section" id="projects">
-                <p class="eyebrow">03 / SELECTED WORK</p>
-                <h2>Selected spaces</h2>
-            </section>
-
-            <section class="placeholder-section" id="visual-direction">
-                <p class="eyebrow">04 / VISUAL DIRECTION</p>
-                <h2>Find your visual direction</h2>
-            </section>
-
-            <section class="placeholder-section" id="services">
-                <p class="eyebrow">05 / SERVICES</p>
-                <h2>Choose the outcome</h2>
-            </section>
-
-            <section class="placeholder-section" id="process">
-                <p class="eyebrow">06 / PROCESS</p>
-                <h2>A clear process</h2>
-            </section>
-
-            <section class="placeholder-section" id="brief">
-                <p class="eyebrow">PROJECT DISCOVERY</p>
-                <h2>Build your project brief</h2>
-            </section>
-
-            <section class="placeholder-section" id="studio">
-                <p class="eyebrow">07 / STUDIO</p>
-                <h2>FORMA Studio</h2>
-            </section>
-        </main>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/translations.js') }}"
-        defer></script>
-
-    <script src="{{ url_for('static', filename='js/app.js') }}" defer>
-    </script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/projects.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
-
 </html>

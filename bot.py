@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
@@ -60,11 +61,11 @@ def submit_project_brief():
     if not name or not email or not contact_method or not preferred_language:
         return jsonify(ok=False, error="missing_required_fields"), 400
 
-    token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    token = telegram_token()
     chat_id = os.getenv("TELEGRAM_CHAT_ID", "").strip()
 
     if not token or not chat_id:
-        logger.error("Telegram delivery is not configured.")
+        logger.error("Telegram brief delivery is not configured.")
         return jsonify(ok=False, error="telegram_not_configured"), 503
 
     message = build_telegram_message(
@@ -75,13 +76,201 @@ def submit_project_brief():
     )
 
     try:
-        send_telegram_message(token=token, chat_id=chat_id, text=message)
+        telegram_api(
+            "sendMessage",
+            {
+                "chat_id": chat_id,
+                "text": message,
+                "disable_web_page_preview": True,
+            },
+        )
     except (HTTPError, URLError, TimeoutError, ValueError) as exc:
         logger.exception("Could not deliver FORMA project brief: %s", exc)
         return jsonify(ok=False, error="telegram_delivery_failed"), 502
 
     logger.info("Project brief delivered for %s.", email)
     return jsonify(ok=True), 200
+
+
+@app.post("/telegram/webhook")
+def telegram_webhook():
+    """Receive Telegram updates and respond to supported bot commands."""
+    configured_secret = os.getenv("WEBHOOK_SECRET", "").strip()
+    received_secret = request.headers.get(
+        "X-Telegram-Bot-Api-Secret-Token",
+        "",
+    ).strip()
+
+    if not configured_secret or received_secret != configured_secret:
+        logger.warning("Rejected Telegram webhook request with invalid secret.")
+        return jsonify(ok=False, error="forbidden"), 403
+
+    update = request.get_json(silent=True)
+
+    if not isinstance(update, dict):
+        return jsonify(ok=False, error="invalid_update"), 400
+
+    try:
+        handle_telegram_update(update)
+    except (HTTPError, URLError, TimeoutError, ValueError) as exc:
+        logger.exception("Could not process Telegram update: %s", exc)
+        return jsonify(ok=False, error="update_processing_failed"), 502
+
+    return jsonify(ok=True), 200
+
+
+@app.post("/api/telegram/setup-webhook")
+def setup_telegram_webhook():
+    """Register the Render webhook URL with Telegram."""
+    payload = request.get_json(silent=True) or {}
+    submitted_secret = clean_text(payload.get("secret"), 256)
+    configured_secret = os.getenv("WEBHOOK_SECRET", "").strip()
+
+    if not configured_secret or submitted_secret != configured_secret:
+        return jsonify(ok=False, error="forbidden"), 403
+
+    webapp_url = os.getenv("WEBAPP_URL", "").strip().rstrip("/")
+
+    if not webapp_url.startswith("https://"):
+        return jsonify(ok=False, error="invalid_webapp_url"), 400
+
+    try:
+        result = telegram_api(
+            "setWebhook",
+            {
+                "url": f"{webapp_url}/telegram/webhook",
+                "secret_token": configured_secret,
+                "allowed_updates": ["message"],
+                "drop_pending_updates": True,
+            },
+        )
+    except (HTTPError, URLError, TimeoutError, ValueError) as exc:
+        logger.exception("Could not configure Telegram webhook: %s", exc)
+        return jsonify(ok=False, error="webhook_setup_failed"), 502
+
+    return jsonify(ok=True, result=result.get("result")), 200
+
+
+def handle_telegram_update(update: dict[str, Any]) -> None:
+    """Handle /start, /brief and /projects commands."""
+    message = update.get("message")
+
+    if not isinstance(message, dict):
+        return
+
+    chat = message.get("chat")
+    if not isinstance(chat, dict):
+        return
+
+    chat_id = chat.get("id")
+    text = clean_text(message.get("text"), 200)
+    first_name = clean_text((message.get("from") or {}).get("first_name"), 80)
+
+    if not chat_id or not text.startswith("/"):
+        return
+
+    command = text.split()[0].split("@")[0].lower()
+    webapp_url = os.getenv("WEBAPP_URL", "").strip().rstrip("/")
+
+    if not webapp_url.startswith("https://"):
+        logger.error("WEBAPP_URL is missing or invalid.")
+        return
+
+    if command == "/start":
+        greeting = f"Welcome, {first_name}." if first_name else "Welcome."
+        send_web_app_message(
+            chat_id=chat_id,
+            text=(
+                f"{greeting}\n\n"
+                "Explore selected interior projects, define your visual direction "
+                "and create a structured project brief with FORMA Studio."
+            ),
+            button_text="Open Studio",
+            url=webapp_url,
+        )
+        return
+
+    if command == "/brief":
+        send_web_app_message(
+            chat_id=chat_id,
+            text=(
+                "Build a structured project brief and receive an initial "
+                "service recommendation."
+            ),
+            button_text="Build Project Brief",
+            url=f"{webapp_url}/#brief",
+        )
+        return
+
+    if command == "/projects":
+        send_web_app_message(
+            chat_id=chat_id,
+            text="Explore selected residential and commercial interior projects.",
+            button_text="View Projects",
+            url=f"{webapp_url}/#projects",
+        )
+        return
+
+
+def send_web_app_message(
+    *,
+    chat_id: int | str,
+    text: str,
+    button_text: str,
+    url: str,
+) -> None:
+    """Send a Telegram message with a Web App inline button."""
+    telegram_api(
+        "sendMessage",
+        {
+            "chat_id": chat_id,
+            "text": text,
+            "reply_markup": {
+                "inline_keyboard": [
+                    [
+                        {
+                            "text": button_text,
+                            "web_app": {"url": url},
+                        }
+                    ]
+                ]
+            },
+        },
+    )
+
+
+def telegram_token() -> str:
+    """Return the configured Telegram bot token."""
+    return os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+
+
+def telegram_api(method: str, payload: dict[str, Any]) -> dict[str, Any]:
+    """Call one Telegram Bot API method and return its JSON response."""
+    token = telegram_token()
+
+    if not token:
+        raise ValueError("TELEGRAM_BOT_TOKEN is not configured")
+
+    url = f"https://api.telegram.org/bot{token}/{method}"
+    body = json.dumps(payload).encode("utf-8")
+
+    telegram_request = Request(
+        url,
+        data=body,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+
+    with urlopen(telegram_request, timeout=15) as response:
+        response_body = json.loads(response.read().decode("utf-8"))
+
+    if not response_body.get("ok"):
+        raise ValueError(
+            f"Telegram API returned ok=false for {method}: "
+            f"{response_body.get('description', 'unknown error')}"
+        )
+
+    return response_body
 
 
 def clean_text(value: Any, max_length: int = 500) -> str:
@@ -147,36 +336,10 @@ def build_telegram_message(
 
     message = "\n".join(lines)
 
-    # Telegram Bot API accepts up to 4096 characters in one message.
     if len(message) > 4000:
         message = message[:3990] + "\n…"
 
     return message
-
-
-def send_telegram_message(*, token: str, chat_id: str, text: str) -> None:
-    """Send one plain-text message through the Telegram Bot API."""
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    body = json.dumps(
-        {
-            "chat_id": chat_id,
-            "text": text,
-            "disable_web_page_preview": True,
-        }
-    ).encode("utf-8")
-
-    telegram_request = Request(
-        url,
-        data=body,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-
-    with urlopen(telegram_request, timeout=12) as response:
-        response_body = json.loads(response.read().decode("utf-8"))
-
-    if not response_body.get("ok"):
-        raise ValueError("Telegram API returned ok=false")
 
 
 if __name__ == "__main__":

@@ -93,6 +93,28 @@
       <section class="placeholder-section" id="brief"><p class="eyebrow">PROJECT DISCOVERY</p><h2>Build your project brief</h2></section>
       <section class="placeholder-section" id="studio"><p class="eyebrow">07 / STUDIO</p><h2>FORMA Studio</h2></section>
     </main>
+
+    <section
+      class="project-detail"
+      id="projectDetail"
+      aria-hidden="true"
+    >
+      <div class="project-detail__bar">
+        <button
+          class="project-detail__back"
+          id="projectDetailBack"
+          type="button"
+        >
+          <span aria-hidden="true">←</span>
+          <span data-i18n="projects.back">Back to projects</span>
+        </button>
+
+        <span class="project-detail__brand">FORMA</span>
+      </div>
+
+      <div class="project-detail__content" id="projectDetailContent"></div>
+    </section>
+
   </div>
 
   <script src="{{ url_for('static', filename='js/translations.js') }}" defer></script>

@@ -12,9 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const siteMenu = document.querySelector("#siteMenu");
   const menuLinks = document.querySelectorAll("[data-menu-link]");
   const projectsList = document.querySelector("#projectsList");
+  const projectDetail = document.querySelector("#projectDetail");
+  const projectDetailContent = document.querySelector("#projectDetailContent");
+  const projectDetailBack = document.querySelector("#projectDetailBack");
   const supportedLanguages = ["en", "es", "ru"];
   const languageLabels = { en: "EN", es: "ES", ru: "RU" };
   let currentLanguage = getSavedLanguage();
+  let activeProjectId = null;
+  let previousScrollPosition = 0;
 
   function getSavedLanguage() {
     const saved = localStorage.getItem("formaLanguage");
@@ -33,6 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return typeof value === "string" ? value : "";
   }
 
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
   function renderProjects(language) {
     if (!projectsList || !Array.isArray(projects)) return;
 
@@ -42,23 +56,98 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return `
         <article class="project-card${layout}" data-project-id="${project.id}">
-          <div class="project-card__media">
-            <img class="project-card__image" src="/static/images/${project.image}" alt="${content.title}" loading="lazy">
-            <span class="project-card__number">${project.number}</span>
-          </div>
+          <button class="project-card__open" type="button" data-open-project="${project.id}">
+            <div class="project-card__media">
+              <img class="project-card__image" src="/static/images/${project.image}" alt="${escapeHtml(content.title)}" loading="lazy">
+              <span class="project-card__number">${project.number}</span>
+            </div>
+          </button>
           <div class="project-card__content">
             <div class="project-card__meta">
-              <span>${content.location}</span><span>${content.type}</span><span>${content.area}</span>
+              <span>${escapeHtml(content.location)}</span><span>${escapeHtml(content.type)}</span><span>${escapeHtml(content.area)}</span>
             </div>
-            <h3 class="project-card__title">${content.title}</h3>
-            <p class="project-card__description">${content.description}</p>
-            <a class="project-card__link" href="#${project.id}" aria-label="${getTranslation("projects.viewProject", language)}: ${content.title}">
+            <h3 class="project-card__title">${escapeHtml(content.title)}</h3>
+            <p class="project-card__description">${escapeHtml(content.description)}</p>
+            <button class="project-card__link" type="button" data-open-project="${project.id}">
               <span>${getTranslation("projects.viewProject", language)}</span><span aria-hidden="true">↗</span>
-            </a>
+            </button>
           </div>
         </article>
       `;
     }).join("");
+  }
+
+  function renderProjectDetail(project, language) {
+    const content = project.translations[language] || project.translations.en;
+    const focusItems = content.focus.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    const gallery = project.images.map((image, index) => `
+      <figure class="project-detail__image project-detail__image--${index + 1}">
+        <img src="/static/images/${image}" alt="${escapeHtml(content.title)} ${index + 1}" loading="${index === 0 ? "eager" : "lazy"}">
+      </figure>
+    `).join("");
+
+    projectDetailContent.innerHTML = `
+      <header class="project-detail__hero">
+        <div class="project-detail__meta">
+          <span>${escapeHtml(project.number)}</span>
+          <span>${escapeHtml(content.location)}</span>
+          <span>${escapeHtml(content.type)}</span>
+          <span>${escapeHtml(content.area)}</span>
+        </div>
+
+        <h1>${escapeHtml(content.title)}</h1>
+        <p>${escapeHtml(content.description)}</p>
+      </header>
+
+      <div class="project-detail__gallery">
+        ${gallery}
+      </div>
+
+      <div class="project-detail__story">
+        <p class="project-detail__intro">${escapeHtml(content.introduction)}</p>
+
+        <div class="project-detail__focus">
+          <p class="eyebrow">${getTranslation("projects.focus", language)}</p>
+          <ul>${focusItems}</ul>
+        </div>
+      </div>
+
+      <div class="project-detail__cta">
+        <p>${getTranslation("projects.similar", language)}</p>
+        <a class="button button--primary" href="#brief" id="projectDetailCta">
+          <span>${getTranslation("global.primaryCta", language)}</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    `;
+  }
+
+  function openProjectDetail(projectId) {
+    const project = projects.find((item) => item.id === projectId);
+    if (!project) return;
+
+    activeProjectId = projectId;
+    previousScrollPosition = window.scrollY;
+    renderProjectDetail(project, currentLanguage);
+    projectDetail.classList.add("is-open");
+    projectDetail.setAttribute("aria-hidden", "false");
+    document.body.classList.add("detail-open");
+    projectDetail.scrollTop = 0;
+    history.replaceState(null, "", `#project-${projectId}`);
+
+    const cta = document.querySelector("#projectDetailCta");
+    if (cta) {
+      cta.addEventListener("click", closeProjectDetail);
+    }
+  }
+
+  function closeProjectDetail() {
+    projectDetail.classList.remove("is-open");
+    projectDetail.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("detail-open");
+    activeProjectId = null;
+    history.replaceState(null, "", "#projects");
+    window.setTimeout(() => window.scrollTo(0, previousScrollPosition), 0);
   }
 
   function applyLanguage(language) {
@@ -80,6 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     renderProjects(language);
+
+    if (activeProjectId) {
+      const activeProject = projects.find((item) => item.id === activeProjectId);
+      if (activeProject) renderProjectDetail(activeProject, language);
+    }
+
     localStorage.setItem("formaLanguage", language);
   }
 
@@ -123,6 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  projectsList.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-open-project]");
+    if (trigger) openProjectDetail(trigger.dataset.openProject);
+  });
+
+  projectDetailBack.addEventListener("click", closeProjectDetail);
   document.addEventListener("click", closeLanguageMenu);
   menuToggle.addEventListener("click", openSiteMenu);
   menuClose.addEventListener("click", closeSiteMenu);
@@ -132,8 +233,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.key === "Escape") {
       closeLanguageMenu();
       closeSiteMenu();
+      if (activeProjectId) closeProjectDetail();
     }
   });
 
   applyLanguage(currentLanguage);
+
+  const requestedProject = window.location.hash.startsWith("#project-")
+    ? window.location.hash.replace("#project-", "")
+    : null;
+
+  if (requestedProject) openProjectDetail(requestedProject);
 });

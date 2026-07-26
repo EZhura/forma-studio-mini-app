@@ -206,7 +206,82 @@
   <div class="process-list" id="processList"></div>
   <div class="process-note"><p data-i18n="process.note">The exact scope and sequence are adapted to the project, location and selected service.</p></div>
 </section>
-      <section class="placeholder-section" id="brief"><p class="eyebrow">PROJECT DISCOVERY</p><h2>Build your project brief</h2></section>
+      
+      <section class="brief-section" id="brief">
+        <div class="brief-section__heading">
+          <div>
+            <p class="eyebrow" data-brief-text="eyebrow">07 / Project Brief</p>
+            <h2 data-brief-text="title">Build your project brief</h2>
+          </div>
+          <p data-brief-text="intro">
+            Answer a few focused questions so we can understand your space, priorities and project stage.
+          </p>
+        </div>
+
+        <div class="brief-app" id="briefApp">
+          <div class="brief-progress" aria-label="Brief progress">
+            <div class="brief-progress__meta">
+              <span data-brief-text="progress">Progress</span>
+              <span id="briefProgressText">1 / 5</span>
+            </div>
+            <div class="brief-progress__line"><span id="briefProgressFill"></span></div>
+          </div>
+
+          <div class="brief-step" id="briefStep"></div>
+
+          <div class="brief-actions">
+            <button class="brief-back" id="briefBack" type="button">
+              <span aria-hidden="true">←</span>
+              <span data-brief-text="back">Back</span>
+            </button>
+            <button class="button button--primary" id="briefNext" type="button">
+              <span id="briefNextText">Continue</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <p class="brief-error" id="briefError" hidden></p>
+        </div>
+      </section>
+
+      
+      <section class="recommendation-section" id="recommendation" hidden>
+        <div class="recommendation-section__heading">
+          <p class="eyebrow" data-recommendation-text="eyebrow">08 / Recommendation</p>
+          <h2 data-recommendation-text="title">A clear next step for your project</h2>
+          <p data-recommendation-text="intro">
+            Based on your answers, this is the most suitable starting point.
+          </p>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="recommendation-card__primary">
+            <p class="eyebrow" data-recommendation-text="recommended">Recommended service</p>
+            <h3 id="recommendationService"></h3>
+            <p id="recommendationReason"></p>
+          </div>
+
+          <div class="recommendation-card__scope">
+            <p class="eyebrow" data-recommendation-text="scope">Likely scope</p>
+            <ul id="recommendationScope"></ul>
+          </div>
+        </div>
+
+        <div class="recommendation-summary">
+          <div class="recommendation-summary__heading">
+            <p class="eyebrow" data-recommendation-text="snapshot">Project snapshot</p>
+            <button class="text-link" id="recommendationEdit" type="button">
+              <span data-recommendation-text="edit">Edit brief</span>
+            </button>
+          </div>
+          <dl id="recommendationSnapshot"></dl>
+        </div>
+
+        <p class="recommendation-note" data-recommendation-text="note">
+          This is an initial recommendation, not a final proposal or cost estimate.
+        </p>
+      </section>
+
       <section class="placeholder-section" id="studio"><p class="eyebrow">07 / STUDIO</p><h2>FORMA Studio</h2></section>
     </main>
 
@@ -238,6 +313,8 @@
   <script src="{{ url_for('static', filename='js/visual-direction.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/services.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/process.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/brief.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/recommendation.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
 </html>

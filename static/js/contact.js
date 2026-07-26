@@ -307,8 +307,22 @@ document.addEventListener("DOMContentLoaded", () => {
       status.textContent = t().success;
       status.classList.add("is-success");
       status.hidden = false;
+
+      window.dispatchEvent(new CustomEvent("forma:contact-sent", {
+        detail: {
+          contact: payload.contact,
+          brief: payload.brief,
+          visualDirection: payload.visualDirection
+        }
+      }));
+
       form.reset();
       form.elements.language.value = language();
+
+      document.querySelector("#confirmation")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     } catch (sendError) {
       console.error("FORMA brief delivery failed:", sendError);
       status.textContent = t().sendError;

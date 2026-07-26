@@ -366,6 +366,65 @@
       </section>
 
       
+      
+      <section class="confirmation-section" id="confirmation" hidden>
+        <div class="confirmation-panel">
+          <div class="confirmation-panel__mark" aria-hidden="true">
+            <span>✓</span>
+          </div>
+
+          <div class="confirmation-panel__content">
+            <p class="eyebrow" data-confirmation-text="eyebrow">10 / Confirmation</p>
+            <h2 data-confirmation-text="title">Your project brief has been sent</h2>
+            <p data-confirmation-text="intro">
+              Thank you. FORMA Studio has received your project details and contact information.
+            </p>
+
+            <div class="confirmation-steps">
+              <article>
+                <span>01</span>
+                <h3 data-confirmation-text="stepOneTitle">We review the brief</h3>
+                <p data-confirmation-text="stepOneText">
+                  We look at the project stage, priorities, budget and visual direction.
+                </p>
+              </article>
+
+              <article>
+                <span>02</span>
+                <h3 data-confirmation-text="stepTwoTitle">We confirm the right format</h3>
+                <p data-confirmation-text="stepTwoText">
+                  The initial recommendation is checked against the scope and location.
+                </p>
+              </article>
+
+              <article>
+                <span>03</span>
+                <h3 data-confirmation-text="stepThreeTitle">We contact you</h3>
+                <p data-confirmation-text="stepThreeText">
+                  You will receive a personal response using your preferred contact method.
+                </p>
+              </article>
+            </div>
+
+            <p class="confirmation-panel__timing" data-confirmation-text="timing">
+              Typical response time: within 1–2 business days.
+            </p>
+
+            <div class="confirmation-actions">
+              <a class="button button--primary" href="#projects">
+                <span data-confirmation-text="projectsButton">Return to projects</span>
+                <span aria-hidden="true">→</span>
+              </a>
+
+              <button class="confirmation-actions__secondary" id="confirmationRestart" type="button">
+                <span data-confirmation-text="restartButton">Start a new brief</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="studio-section" id="studio">
         <div class="studio-section__heading">
           <div>
@@ -507,6 +566,7 @@
   <script src="{{ url_for('static', filename='js/recommendation.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/contact.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/studio.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/confirmation.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
 </body>
 </html>

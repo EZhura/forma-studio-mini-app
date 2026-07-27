@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -291,13 +292,329 @@ def clean_text(value: Any, max_length: int = 500) -> str:
     return text[:max_length]
 
 
-def list_text(value: Any, max_items: int = 12) -> str:
-    """Convert a list-like answer into a readable line."""
-    if not isinstance(value, list):
-        return clean_text(value)
+MESSAGE_COPY: dict[str, dict[str, Any]] = {
+    "en": {
+        "title": "🏛 FORMA STUDIO — NEW PROJECT BRIEF",
+        "submitted": "Submitted",
+        "contact": "CONTACT",
+        "project": "PROJECT",
+        "recommendation": "RECOMMENDATION",
+        "support": "SUPPORT NEEDED",
+        "priorities": "PRIORITIES",
+        "budget_timing": "BUDGET & TIMING",
+        "visual": "VISUAL DIRECTION",
+        "notes": "ADDITIONAL NOTES",
+        "message": "CONTACT MESSAGE",
+        "app": "MINI APP",
+        "labels": {
+            "name": "Name",
+            "email": "Email",
+            "phone": "Phone / Telegram",
+            "contact_method": "Preferred contact",
+            "language": "Language",
+            "project_type": "Space type",
+            "residential_use": "Property use",
+            "commercial_type": "Commercial format",
+            "location": "Location",
+            "area": "Area",
+            "stage": "Project stage",
+            "service": "Recommended service",
+            "budget": "Budget",
+            "timing": "Timing",
+            "completion": "Target completion",
+            "date": "Target date",
+            "inspiration": "Inspiration link",
+        },
+        "none": "Not specified",
+    },
+    "es": {
+        "title": "🏛 FORMA STUDIO — NUEVO BRIEFING DE PROYECTO",
+        "submitted": "Enviado",
+        "contact": "CONTACTO",
+        "project": "PROYECTO",
+        "recommendation": "RECOMENDACIÓN",
+        "support": "APOYO NECESARIO",
+        "priorities": "PRIORIDADES",
+        "budget_timing": "PRESUPUESTO Y PLAZOS",
+        "visual": "DIRECCIÓN VISUAL",
+        "notes": "NOTAS ADICIONALES",
+        "message": "MENSAJE DE CONTACTO",
+        "app": "MINI APP",
+        "labels": {
+            "name": "Nombre",
+            "email": "Email",
+            "phone": "Teléfono / Telegram",
+            "contact_method": "Contacto preferido",
+            "language": "Idioma",
+            "project_type": "Tipo de espacio",
+            "residential_use": "Uso de la propiedad",
+            "commercial_type": "Formato comercial",
+            "location": "Ubicación",
+            "area": "Superficie",
+            "stage": "Fase del proyecto",
+            "service": "Servicio recomendado",
+            "budget": "Presupuesto",
+            "timing": "Plazos",
+            "completion": "Finalización objetivo",
+            "date": "Fecha objetivo",
+            "inspiration": "Enlace de inspiración",
+        },
+        "none": "No especificado",
+    },
+    "ru": {
+        "title": "🏛 FORMA STUDIO — НОВЫЙ ПРОЕКТНЫЙ БРИФ",
+        "submitted": "Отправлено",
+        "contact": "КОНТАКТЫ",
+        "project": "ПРОЕКТ",
+        "recommendation": "РЕКОМЕНДАЦИЯ",
+        "support": "НЕОБХОДИМАЯ ПОДДЕРЖКА",
+        "priorities": "ПРИОРИТЕТЫ",
+        "budget_timing": "БЮДЖЕТ И СРОКИ",
+        "visual": "ВИЗУАЛЬНОЕ НАПРАВЛЕНИЕ",
+        "notes": "ДОПОЛНИТЕЛЬНЫЕ ОСОБЕННОСТИ",
+        "message": "СООБЩЕНИЕ",
+        "app": "MINI APP",
+        "labels": {
+            "name": "Имя",
+            "email": "Email",
+            "phone": "Телефон / Telegram",
+            "contact_method": "Предпочтительный способ связи",
+            "language": "Язык",
+            "project_type": "Тип пространства",
+            "residential_use": "Использование объекта",
+            "commercial_type": "Формат коммерческого пространства",
+            "location": "Локация",
+            "area": "Площадь",
+            "stage": "Этап проекта",
+            "service": "Рекомендуемая услуга",
+            "budget": "Бюджет",
+            "timing": "Сроки",
+            "completion": "Целевая дата завершения",
+            "date": "Дата",
+            "inspiration": "Ссылка на референсы",
+        },
+        "none": "Не указано",
+    },
+}
 
-    items = [clean_text(item, 120) for item in value[:max_items]]
-    return ", ".join(item for item in items if item)
+
+OPTION_LABELS: dict[str, dict[str, tuple[str, str, str]]] = {
+    "projectType": {
+        "apartment": ("Apartment", "Apartamento", "Квартира"),
+        "house": ("House", "Casa", "Дом"),
+        "hospitality": ("Hotel, restaurant or café", "Hotel, restaurante o cafetería", "Отель, ресторан или кафе"),
+        "store": ("Store", "Tienda", "Магазин"),
+        "office": ("Office or studio", "Oficina o estudio", "Офис или студия"),
+        "other": ("Other", "Otro", "Другое"),
+    },
+    "residentialUse": {
+        "primary": ("Primary residence", "Vivienda habitual", "Основное жильё"),
+        "second": ("Second or holiday residence", "Segunda residencia", "Второе жильё или дом для отдыха"),
+        "investment": ("Investment property", "Propiedad de inversión", "Инвестиционный объект"),
+        "undecided": ("Not decided yet", "Aún no decidido", "Пока не определено"),
+    },
+    "area": {
+        "under60": ("Under 60 m²", "Menos de 60 m²", "До 60 м²"),
+        "60-100": ("60–100 m²", "60–100 m²", "60–100 м²"),
+        "100-180": ("100–180 m²", "100–180 m²", "100–180 м²"),
+        "180-300": ("180–300 m²", "180–300 m²", "180–300 м²"),
+        "over300": ("Over 300 m²", "Más de 300 m²", "Более 300 м²"),
+        "unsure": ("Not sure", "No lo sé", "Не знаю"),
+    },
+    "stage": {
+        "exploring": ("Exploring possibilities", "Explorando posibilidades", "Изучает возможности"),
+        "selected": ("Property selected", "Propiedad seleccionada", "Объект уже выбран"),
+        "drawings": ("Plans or drawings available", "Hay planos disponibles", "Есть планы или чертежи"),
+        "design-started": ("Design already started", "El diseño ya ha comenzado", "Дизайн уже начат"),
+        "renovation": ("Renovation in progress", "Reforma en curso", "Ремонт уже идёт"),
+        "review": ("Needs a professional review", "Necesita una revisión profesional", "Нужна профессиональная проверка"),
+    },
+    "support": {
+        "direction": ("Clarify the direction", "Aclarar la dirección", "Определить направление"),
+        "layout": ("Improve the layout", "Mejorar la distribución", "Улучшить планировку"),
+        "complete": ("Design the complete interior", "Diseñar todo el interior", "Спроектировать интерьер целиком"),
+        "renovation-prep": ("Prepare for renovation", "Preparar la reforma", "Подготовиться к ремонту"),
+        "coordination": ("Coordinate implementation", "Coordinar la ejecución", "Координировать реализацию"),
+        "review": ("Review an existing project", "Revisar un proyecto existente", "Проверить существующий проект"),
+        "unsure": ("Not sure yet", "Aún no lo sé", "Пока не знает"),
+    },
+    "priorities": {
+        "space": ("Better use of space", "Mejor uso del espacio", "Лучшее использование пространства"),
+        "calm": ("Calm and coherent atmosphere", "Atmósfera serena y coherente", "Спокойная и цельная атмосфера"),
+        "storage": ("Storage and functionality", "Almacenamiento y funcionalidad", "Хранение и функциональность"),
+        "light": ("More natural light", "Más luz natural", "Больше естественного света"),
+        "materials": ("Material quality", "Calidad de los materiales", "Качество материалов"),
+        "identity": ("Distinctive identity", "Identidad propia", "Выразительная идентичность"),
+        "value": ("Property value", "Valor de la propiedad", "Ценность объекта"),
+        "management": ("Well-managed process", "Proceso bien gestionado", "Хорошо организованный процесс"),
+    },
+    "budget": {
+        "under50": ("Under €50k", "Menos de 50.000 €", "До €50 тыс."),
+        "50-100": ("€50–100k", "50.000–100.000 €", "€50–100 тыс."),
+        "100-200": ("€100–200k", "100.000–200.000 €", "€100–200 тыс."),
+        "200-400": ("€200–400k", "200.000–400.000 €", "€200–400 тыс."),
+        "over400": ("Over €400k", "Más de 400.000 €", "Более €400 тыс."),
+        "undefined": ("Not defined", "No definido", "Не определён"),
+    },
+    "timing": {
+        "asap": ("As soon as possible", "Lo antes posible", "Как можно скорее"),
+        "3months": ("Within 3 months", "En 3 meses", "В течение 3 месяцев"),
+        "6months": ("Within 6 months", "En 6 meses", "В течение 6 месяцев"),
+        "12months": ("Within 12 months", "En 12 meses", "В течение 12 месяцев"),
+        "flexible": ("No fixed timing", "Sin plazo fijo", "Без фиксированных сроков"),
+    },
+    "completion": {
+        "yes": ("Yes", "Sí", "Да"),
+        "no": ("No", "No", "Нет"),
+        "unsure": ("Not sure", "No lo sé", "Не знает"),
+    },
+    "contactMethod": {
+        "email": ("Email", "Email", "Email"),
+        "telegram": ("Telegram", "Telegram", "Telegram"),
+        "whatsapp": ("WhatsApp", "WhatsApp", "WhatsApp"),
+    },
+    "language": {
+        "en": ("English", "Inglés", "Английский"),
+        "es": ("Spanish", "Español", "Испанский"),
+        "ru": ("Russian", "Ruso", "Русский"),
+    },
+}
+
+
+VISUAL_LABELS: dict[str, tuple[str, str, str]] = {
+    "warm-architectural-minimalism": (
+        "Warm Architectural Minimalism",
+        "Minimalismo arquitectónico cálido",
+        "Тёплый архитектурный минимализм",
+    ),
+    "quiet-mediterranean-modernism": (
+        "Quiet Mediterranean Modernism",
+        "Modernismo mediterráneo sereno",
+        "Спокойный средиземноморский модернизм",
+    ),
+    "sculptural-materialism": (
+        "Sculptural Materialism",
+        "Materialidad escultórica",
+        "Скульптурная материальность",
+    ),
+    "soft-contemporary-structure": (
+        "Soft Contemporary Structure",
+        "Estructura contemporánea suave",
+        "Мягкая современная структура",
+    ),
+    "atmospheric-minimalism": (
+        "Atmospheric Minimalism",
+        "Minimalismo atmosférico",
+        "Атмосферный минимализм",
+    ),
+    "refined-naturalism": (
+        "Refined Naturalism",
+        "Naturalismo refinado",
+        "Утончённый натурализм",
+    ),
+    "expressive-contemporary": (
+        "Expressive Contemporary",
+        "Contemporáneo expresivo",
+        "Выразительный современный интерьер",
+    ),
+    "layered-mediterranean-interior": (
+        "Layered Mediterranean Interior",
+        "Interior mediterráneo con capas",
+        "Многослойный средиземноморский интерьер",
+    ),
+}
+
+
+SERVICE_LABELS: dict[str, tuple[str, str, str]] = {
+    "direction": (
+        "Define Direction",
+        "Definir la dirección",
+        "Определить направление",
+    ),
+    "complete": (
+        "Design Complete Space",
+        "Diseñar el espacio completo",
+        "Спроектировать пространство целиком",
+    ),
+    "delivery": (
+        "Transform and Deliver",
+        "Transformar y ejecutar",
+        "Спроектировать и реализовать",
+    ),
+    "review": (
+        "Review Existing Project",
+        "Revisar un proyecto existente",
+        "Проверить существующий проект",
+    ),
+}
+
+
+def language_code(value: Any) -> str:
+    """Return a supported UI language code."""
+    code = clean_text(value, 10).lower()
+    return code if code in {"en", "es", "ru"} else "en"
+
+
+def language_index(code: str) -> int:
+    return {"en": 0, "es": 1, "ru": 2}[code]
+
+
+def option_label(group: str, value: Any, language: str) -> str:
+    key = clean_text(value, 120)
+    labels = OPTION_LABELS.get(group, {}).get(key)
+    return labels[language_index(language)] if labels else key
+
+
+def option_list(group: str, values: Any, language: str) -> list[str]:
+    if not isinstance(values, list):
+        return []
+
+    result: list[str] = []
+    for value in values[:12]:
+        label = option_label(group, value, language)
+        if label:
+            result.append(label)
+    return result
+
+
+def recommendation_key(brief: dict[str, Any]) -> str:
+    support = brief.get("support")
+    support_values = support if isinstance(support, list) else []
+
+    if (
+        brief.get("stage") in {"review", "design-started"}
+        or "review" in support_values
+    ):
+        return "review"
+
+    if brief.get("stage") == "renovation" or "coordination" in support_values:
+        return "delivery"
+
+    if (
+        brief.get("stage") == "exploring"
+        or "direction" in support_values
+        or "unsure" in support_values
+    ):
+        return "direction"
+
+    return "complete"
+
+
+def append_field(
+    lines: list[str],
+    label: str,
+    value: Any,
+    *,
+    max_length: int = 500,
+) -> None:
+    text = clean_text(value, max_length)
+    if text:
+        lines.append(f"{label}: {text}")
+
+
+def append_bullets(lines: list[str], values: list[str]) -> None:
+    for value in values:
+        lines.append(f"• {value}")
 
 
 def build_telegram_message(
@@ -307,41 +624,132 @@ def build_telegram_message(
     visual_direction: dict[str, Any],
     language: str,
 ) -> str:
-    """Create a plain-text Telegram message from the submitted brief."""
-    lines = [
-        "🏛 FORMA STUDIO — NEW PROJECT BRIEF",
+    """Create a translated, readable Telegram message."""
+    lang = language_code(
+        contact.get("language")
+        or language
+    )
+    copy = MESSAGE_COPY[lang]
+    labels = copy["labels"]
+    webapp_url = os.getenv("WEBAPP_URL", "").strip()
+
+    submitted_at = datetime.now(timezone.utc).strftime("%d.%m.%Y · %H:%M UTC")
+    service_key = recommendation_key(brief)
+    service_name = SERVICE_LABELS[service_key][language_index(lang)]
+
+    lines: list[str] = [
+        copy["title"],
+        f"{copy['submitted']}: {submitted_at}",
         "",
-        "CONTACT",
-        f"Name: {clean_text(contact.get('name'), 120) or '—'}",
-        f"Email: {clean_text(contact.get('email'), 200) or '—'}",
-        f"Phone / Telegram: {clean_text(contact.get('phone'), 200) or '—'}",
-        f"Preferred contact: {clean_text(contact.get('contactMethod'), 40) or '—'}",
-        f"Preferred language: {clean_text(contact.get('language'), 10) or clean_text(language, 10) or '—'}",
-        "",
-        "PROJECT",
-        f"Type: {clean_text(brief.get('projectType'), 80) or '—'}",
-        f"Residential use: {clean_text(brief.get('residentialUse'), 80) or '—'}",
-        f"Commercial type: {clean_text(brief.get('commercialType'), 200) or '—'}",
-        f"Location: {clean_text(brief.get('cityCountry'), 200) or clean_text(brief.get('location'), 80) or '—'}",
-        f"Area: {clean_text(brief.get('area'), 80) or '—'}",
-        f"Stage: {clean_text(brief.get('stage'), 80) or '—'}",
-        f"Support needed: {list_text(brief.get('support')) or '—'}",
-        f"Priorities: {list_text(brief.get('priorities')) or '—'}",
-        f"Budget: {clean_text(brief.get('budget'), 80) or '—'}",
-        f"Timing: {clean_text(brief.get('timing'), 80) or '—'}",
-        f"Target completion: {clean_text(brief.get('completion'), 40) or '—'}",
-        f"Target date: {clean_text(brief.get('completionDate'), 40) or '—'}",
-        "",
-        "VISUAL DIRECTION",
-        f"Result: {clean_text(visual_direction.get('resultId'), 120) or '—'}",
-        f"Inspiration: {clean_text(brief.get('inspiration'), 500) or '—'}",
-        "",
-        "ADDITIONAL NOTES",
-        clean_text(brief.get("requirements"), 1500) or "—",
-        "",
-        "CONTACT MESSAGE",
-        clean_text(contact.get("message"), 1500) or "—",
+        copy["contact"],
     ]
+
+    append_field(lines, labels["name"], contact.get("name"), max_length=120)
+    append_field(lines, labels["email"], contact.get("email"), max_length=200)
+    append_field(lines, labels["phone"], contact.get("phone"), max_length=200)
+    append_field(
+        lines,
+        labels["contact_method"],
+        option_label("contactMethod", contact.get("contactMethod"), lang),
+    )
+    append_field(
+        lines,
+        labels["language"],
+        option_label("language", lang, lang),
+    )
+
+    lines.extend(["", copy["project"]])
+    append_field(
+        lines,
+        labels["project_type"],
+        option_label("projectType", brief.get("projectType"), lang),
+    )
+
+    if brief.get("projectType") in {"apartment", "house"}:
+        append_field(
+            lines,
+            labels["residential_use"],
+            option_label("residentialUse", brief.get("residentialUse"), lang),
+        )
+
+    commercial_type = clean_text(brief.get("commercialType"), 200)
+    if commercial_type:
+        append_field(lines, labels["commercial_type"], commercial_type)
+
+    location = (
+        clean_text(brief.get("cityCountry"), 200)
+        or option_label("location", brief.get("location"), lang)
+    )
+    append_field(lines, labels["location"], location)
+    append_field(
+        lines,
+        labels["area"],
+        option_label("area", brief.get("area"), lang),
+    )
+    append_field(
+        lines,
+        labels["stage"],
+        option_label("stage", brief.get("stage"), lang),
+    )
+
+    lines.extend(["", copy["recommendation"]])
+    append_field(lines, labels["service"], service_name)
+
+    support_values = option_list("support", brief.get("support"), lang)
+    if support_values:
+        lines.extend(["", copy["support"]])
+        append_bullets(lines, support_values)
+
+    priority_values = option_list("priorities", brief.get("priorities"), lang)
+    if priority_values:
+        lines.extend(["", copy["priorities"]])
+        append_bullets(lines, priority_values)
+
+    lines.extend(["", copy["budget_timing"]])
+    append_field(
+        lines,
+        labels["budget"],
+        option_label("budget", brief.get("budget"), lang),
+    )
+    append_field(
+        lines,
+        labels["timing"],
+        option_label("timing", brief.get("timing"), lang),
+    )
+
+    completion = clean_text(brief.get("completion"), 40)
+    if completion:
+        append_field(
+            lines,
+            labels["completion"],
+            option_label("completion", completion, lang),
+        )
+
+    append_field(lines, labels["date"], brief.get("completionDate"), max_length=40)
+
+    visual_result = clean_text(visual_direction.get("resultId"), 120)
+    inspiration = clean_text(brief.get("inspiration"), 500)
+    if visual_result or inspiration:
+        lines.extend(["", copy["visual"]])
+        if visual_result:
+            visual_name = VISUAL_LABELS.get(visual_result)
+            append_field(
+                lines,
+                labels["service"] if False else "Result",
+                visual_name[language_index(lang)] if visual_name else visual_result,
+            )
+        append_field(lines, labels["inspiration"], inspiration)
+
+    requirements = clean_text(brief.get("requirements"), 1500)
+    if requirements:
+        lines.extend(["", copy["notes"], requirements])
+
+    contact_message = clean_text(contact.get("message"), 1500)
+    if contact_message:
+        lines.extend(["", copy["message"], contact_message])
+
+    if webapp_url:
+        lines.extend(["", copy["app"], webapp_url])
 
     message = "\n".join(lines)
 

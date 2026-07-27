@@ -467,3 +467,41 @@
 .confirmation-section[hidden] {
   display: none !important;
 }
+
+/* ---------- Final gap fix: Selected Work → Studio ---------- */
+
+.projects-section {
+  padding-bottom: 48px !important;
+}
+
+.projects-list {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.projects-list .project-card:last-child {
+  min-height: 0 !important;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.projects-list .project-card:last-child .project-card__media,
+.projects-list .project-card:last-child .project-card__content {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.studio-section {
+  padding-top: 56px !important;
+}
+
+@media (max-width: 720px) {
+  .projects-section {
+    padding-bottom: 36px !important;
+  }
+
+  .studio-section {
+    padding-top: 48px !important;
+  }
+}

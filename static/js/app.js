@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <div class="service-card__details" hidden>
             <div class="service-card__image">
-              <img src="/static/images/${service.image}" alt="${escapeHtml(content.title)}" loading="lazy">
+              <img src="/static/images/${service.image}" alt="${escapeHtml(content.title)}" loading="eager" decoding="async">
             </div>
 
             <div class="service-card__body">
@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const focusItems = content.focus.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
     const gallery = project.images.map((image, index) => `
       <figure class="project-detail__image project-detail__image--${index + 1}">
-        <img src="/static/images/${image}" alt="${escapeHtml(content.title)} ${index + 1}" loading="${index === 0 ? "eager" : "lazy"}">
+        <img src="/static/images/${image}" alt="${escapeHtml(content.title)} ${index + 1}" loading="eager" decoding="async">
       </figure>
     `).join("");
 

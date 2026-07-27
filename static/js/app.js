@@ -476,27 +476,48 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!trigger) return;
 
     const id = trigger.dataset.atmosphere;
-    if (visualState.atmospheres.includes(id)) {
+    const wasSelected = visualState.atmospheres.includes(id);
+
+    if (wasSelected) {
       visualState.atmospheres = visualState.atmospheres.filter((item) => item !== id);
     } else if (visualState.atmospheres.length < 3) {
       visualState.atmospheres.push(id);
+    } else {
+      return;
     }
+
+    const isSelected = visualState.atmospheres.includes(id);
+    trigger.classList.toggle("is-selected", isSelected);
+    trigger.setAttribute("aria-pressed", String(isSelected));
+
+    const icon = trigger.querySelector("span:last-child");
+    if (icon) icon.textContent = isSelected ? "×" : "+";
 
     visualState.resultId = null;
     if (visualResult) visualResult.hidden = true;
     saveVisualState();
-    renderVisualBuilder(currentLanguage);
   });
 
   contrastOptions?.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-contrast-option]");
     if (!trigger) return;
 
-    visualState.contrasts[trigger.dataset.contrastPair] = trigger.dataset.contrastOption;
+    const pairId = trigger.dataset.contrastPair;
+    const optionId = trigger.dataset.contrastOption;
+
+    visualState.contrasts[pairId] = optionId;
+
+    contrastOptions
+      .querySelectorAll(`[data-contrast-pair="${pairId}"]`)
+      .forEach((option) => {
+        const isSelected = option === trigger;
+        option.classList.toggle("is-selected", isSelected);
+        option.setAttribute("aria-pressed", String(isSelected));
+      });
+
     visualState.resultId = null;
     if (visualResult) visualResult.hidden = true;
     saveVisualState();
-    renderVisualBuilder(currentLanguage);
   });
 
   materialOptions?.addEventListener("click", (event) => {
@@ -504,16 +525,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!trigger) return;
 
     const id = trigger.dataset.material;
-    if (visualState.materials.includes(id)) {
+    const wasSelected = visualState.materials.includes(id);
+
+    if (wasSelected) {
       visualState.materials = visualState.materials.filter((item) => item !== id);
     } else if (visualState.materials.length < 4) {
       visualState.materials.push(id);
+    } else {
+      return;
     }
+
+    const isSelected = visualState.materials.includes(id);
+    trigger.classList.toggle("is-selected", isSelected);
+    trigger.setAttribute("aria-pressed", String(isSelected));
 
     visualState.resultId = null;
     if (visualResult) visualResult.hidden = true;
     saveVisualState();
-    renderVisualBuilder(currentLanguage);
   });
 
   visualResultButton?.addEventListener("click", () => {

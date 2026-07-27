@@ -344,7 +344,9 @@ document.addEventListener("DOMContentLoaded", () => {
         residential ? question(q.residentialUse, choiceGroup("residentialUse")) : "",
         commercial ? field("commercialType", q.commercialType, "text", true) : "",
         question(q.location, choiceGroup("location")),
-        field("cityCountry", q.cityCountry),
+        ["barcelona", "lisbon"].includes(a.location)
+          ? ""
+          : field("cityCountry", q.cityCountry),
         question(q.area, choiceGroup("area"))
       ].join("");
     }
@@ -474,7 +476,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
       }
 
-      if (!String(a.cityCountry || "").trim()) {
+      if (
+        !["barcelona", "lisbon"].includes(a.location) &&
+        !String(a.cityCountry || "").trim()
+      ) {
         markMissingField('[data-brief-input="cityCountry"]', q.cityCountry);
         return false;
       }
@@ -559,10 +564,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } else {
       state.answers[name] = value;
+
       if (name === "projectType") {
         state.answers.residentialUse = "";
         state.answers.commercialType = "";
       }
+
+      if (name === "location") {
+        if (value === "barcelona") {
+          state.answers.cityCountry = "Barcelona, Spain";
+        } else if (value === "lisbon") {
+          state.answers.cityCountry = "Lisbon, Portugal";
+        } else {
+          state.answers.cityCountry = "";
+        }
+      }
+
       if (name === "completion" && value !== "yes") {
         state.answers.completionDate = "";
       }

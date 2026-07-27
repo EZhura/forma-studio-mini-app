@@ -429,3 +429,41 @@
     font-size: clamp(30px, 9vw, 40px) !important;
   }
 }
+
+/* ---------- Reduce gap between Projects and Studio ---------- */
+
+.projects-section {
+  padding-bottom: 80px !important;
+}
+
+.projects-list {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.projects-list .project-card:last-child {
+  margin-bottom: 0 !important;
+  min-height: auto !important;
+}
+
+.studio-section {
+  padding-top: 88px !important;
+}
+
+@media (max-width: 720px) {
+  .projects-section {
+    padding-bottom: 56px !important;
+  }
+
+  .studio-section {
+    padding-top: 64px !important;
+  }
+}
+
+/* ---------- Respect hidden Visual Direction result ---------- */
+
+.visual-result[hidden],
+.recommendation-section[hidden],
+.confirmation-section[hidden] {
+  display: none !important;
+}

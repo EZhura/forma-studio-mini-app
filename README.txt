@@ -1,15 +1,22 @@
-FORMA Studio — Visual Direction mobile no-flicker fix
+FORMA Studio — Studio section order update
 
-Replace:
-static/js/app.js
+Replace/add:
+1. templates/index.html
+2. static/js/section-order.js
 
-with the file from this archive.
+Changes:
+- Studio moved directly after Selected Work.
+- Menu order: Selected Work → Studio → Visual Direction → Services → Process → Brief.
+- Section numbering:
+  01 Selected Work
+  02 Studio
+  03 Visual Direction
+  04 Services
+  05 Process
+  06 Project Brief
+  07 Recommendation
+  08 Contact
+- Confirmation no longer has a section number.
+- Number prefixes remain correct after EN / ES / RU language changes.
 
-What changed:
-- option cards are no longer rebuilt after every tap;
-- images remain loaded in Telegram WebView;
-- only is-selected, aria-pressed and the + / × symbol are updated;
-- selection limits remain unchanged:
-  atmospheres — max 3;
-  materials — max 4;
-  contrast — one choice per pair.
+No brief, Telegram, project, service, process or form logic was changed.

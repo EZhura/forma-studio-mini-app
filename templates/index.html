@@ -52,12 +52,12 @@
         </div>
         <div class="site-menu__links">
           <a href="#projects" data-menu-link><span>01</span><span data-i18n="nav.projects">Selected Work</span></a>
-          <a href="#visual-direction" data-menu-link><span>02</span><span data-i18n="nav.visual">Visual
+          <a href="#studio" data-menu-link><span>02</span><span data-i18n="nav.studio">Studio</span></a>
+          <a href="#visual-direction" data-menu-link><span>03</span><span data-i18n="nav.visual">Visual
               Direction</span></a>
-          <a href="#services" data-menu-link><span>03</span><span data-i18n="nav.services">Services</span></a>
-          <a href="#process" data-menu-link><span>04</span><span data-i18n="nav.process">Process</span></a>
-          <a href="#brief" data-menu-link><span>05</span><span data-i18n="nav.brief">Build Your Brief</span></a>
-          <a href="#studio" data-menu-link><span>06</span><span data-i18n="nav.studio">Studio</span></a>
+          <a href="#services" data-menu-link><span>04</span><span data-i18n="nav.services">Services</span></a>
+          <a href="#process" data-menu-link><span>05</span><span data-i18n="nav.process">Process</span></a>
+          <a href="#brief" data-menu-link><span>06</span><span data-i18n="nav.brief">Build Your Brief</span></a>
         </div>
         <div class="site-menu__footer">
           <p data-i18n="global.locations">Barcelona · Lisbon · Worldwide</p>
@@ -95,7 +95,7 @@
       <section class="projects-section" id="projects">
         <div class="section-heading">
           <div>
-            <p class="eyebrow" data-i18n="projects.eyebrow">03 / Selected Work</p>
+            <p class="eyebrow" data-i18n="projects.eyebrow">01 / Selected Work</p>
             <h2 data-i18n="projects.title">Selected spaces</h2>
           </div>
           <p class="section-heading__intro" data-i18n="projects.intro">Residential and commercial interiors shaped by
@@ -104,356 +104,10 @@
         <div class="projects-list" id="projectsList"></div>
       </section>
 
-
-      <section class="visual-direction-section" id="visual-direction">
-        <div class="section-heading section-heading--light">
-          <div>
-            <p class="eyebrow" data-i18n="visual.eyebrow">04 / Visual Direction</p>
-            <h2 data-i18n="visual.title">Find your visual direction</h2>
-          </div>
-          <p class="section-heading__intro" data-i18n="visual.intro">
-            Choose the atmospheres, contrasts and materials that feel closest to your project.
-          </p>
-        </div>
-
-        <div class="visual-builder" id="visualBuilder">
-          <section class="visual-step" data-visual-step="1">
-            <div class="visual-step__heading">
-              <span>01</span>
-              <div>
-                <h3 data-i18n="visual.atmosphereTitle">Choose up to three atmospheres</h3>
-                <p data-i18n="visual.atmosphereHint">Select the words that best describe how the space should feel.</p>
-              </div>
-            </div>
-            <div class="atmosphere-grid" id="atmosphereOptions"></div>
-          </section>
-
-          <section class="visual-step" data-visual-step="2">
-            <div class="visual-step__heading">
-              <span>02</span>
-              <div>
-                <h3 data-i18n="visual.contrastTitle">Choose between visual contrasts</h3>
-                <p data-i18n="visual.contrastHint">There is no right answer — choose what feels more natural to you.</p>
-              </div>
-            </div>
-            <div class="contrast-grid" id="contrastOptions"></div>
-          </section>
-
-          <section class="visual-step" data-visual-step="3">
-            <div class="visual-step__heading">
-              <span>03</span>
-              <div>
-                <h3 data-i18n="visual.materialTitle">Select up to four materials</h3>
-                <p data-i18n="visual.materialHint">Choose the surfaces and finishes you would like to explore.</p>
-              </div>
-            </div>
-            <div class="materials-grid" id="materialOptions"></div>
-          </section>
-
-          <div class="visual-builder__actions">
-            <button class="button button--primary" id="visualResultButton" type="button">
-              <span data-i18n="visual.showResult">Show my direction</span>
-              <span aria-hidden="true">→</span>
-            </button>
-            <button class="visual-reset" id="visualResetButton" type="button" data-i18n="visual.reset">
-              Reset choices
-            </button>
-          </div>
-
-          <section class="visual-result" id="visualResult" hidden>
-            <div class="visual-result__image" id="visualResultImage"></div>
-            <div class="visual-result__content">
-              <p class="eyebrow" data-i18n="visual.resultEyebrow">Your visual direction</p>
-              <h3 id="visualResultTitle"></h3>
-              <p id="visualResultDescription"></p>
-
-              <div class="visual-result__summary">
-                <div>
-                  <span data-i18n="visual.summaryAtmosphere">Atmosphere</span>
-                  <p id="visualResultAtmospheres"></p>
-                </div>
-                <div>
-                  <span data-i18n="visual.summaryMaterials">Materials</span>
-                  <p id="visualResultMaterials"></p>
-                </div>
-              </div>
-
-              <p class="visual-result__note" data-i18n="visual.resultNote">
-                This direction will be saved and added to your project brief.
-              </p>
-
-              <a class="button button--secondary visual-result__cta" href="#brief">
-                <span data-i18n="visual.continueBrief">Continue to project brief</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </section>
-        </div>
-      </section>
-
-      <section class="services-section" id="services">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow" data-i18n="services.eyebrow">05 / Services</p>
-            <h2 data-i18n="services.title">Choose the outcome</h2>
-          </div>
-          <p class="section-heading__intro" data-i18n="services.intro">
-            Start with what you need to achieve. We will define the right level of support around your project.
-          </p>
-        </div>
-
-        <div class="services-list" id="servicesList"></div>
-
-        <div class="services-cta">
-          <p data-i18n="services.ctaText">
-            Not sure which service fits your project?
-          </p>
-
-          <a class="button button--primary" href="#brief">
-            <span data-i18n="services.ctaButton">Build your brief</span>
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
-      </section>
-      <section class="process-section" id="process">
-        <div class="section-heading section-heading--light">
-          <div>
-            <p class="eyebrow" data-i18n="process.eyebrow">06 / Process</p>
-            <h2 data-i18n="process.title">A clear process</h2>
-          </div>
-          <p class="section-heading__intro" data-i18n="process.intro">Each stage answers a different question and
-            produces a clear next step.</p>
-        </div>
-        <div class="process-list" id="processList"></div>
-        <div class="process-note">
-          <p data-i18n="process.note">The exact scope and sequence are adapted to the project, location and selected
-            service.</p>
-        </div>
-      </section>
-
-      <section class="brief-section" id="brief">
-        <div class="brief-section__heading">
-          <div>
-            <p class="eyebrow" data-brief-text="eyebrow">07 / Project Brief</p>
-            <h2 data-brief-text="title">Build your project brief</h2>
-          </div>
-          <p data-brief-text="intro">
-            Answer a few focused questions so we can understand your space, priorities and project stage.
-          </p>
-        </div>
-
-        <div class="brief-app" id="briefApp">
-          <div class="brief-progress" aria-label="Brief progress">
-            <div class="brief-progress__meta">
-              <span data-brief-text="progress">Progress</span>
-              <span id="briefProgressText">1 / 5</span>
-            </div>
-            <div class="brief-progress__line"><span id="briefProgressFill"></span></div>
-          </div>
-
-          <div class="brief-step" id="briefStep"></div>
-
-          <div class="brief-actions">
-            <button class="brief-back" id="briefBack" type="button">
-              <span aria-hidden="true">←</span>
-              <span data-brief-text="back">Back</span>
-            </button>
-            <button class="button button--primary" id="briefNext" type="button">
-              <span id="briefNextText">Continue</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-
-          <p class="brief-error" id="briefError" hidden></p>
-        </div>
-      </section>
-
-
-      <section class="recommendation-section" id="recommendation" hidden>
-        <div class="recommendation-section__heading">
-          <p class="eyebrow" data-recommendation-text="eyebrow">08 / Recommendation</p>
-          <h2 data-recommendation-text="title">A clear next step for your project</h2>
-          <p data-recommendation-text="intro">
-            Based on your answers, this is the most suitable starting point.
-          </p>
-        </div>
-
-        <div class="recommendation-card">
-          <div class="recommendation-card__primary">
-            <p class="eyebrow" data-recommendation-text="recommended">Recommended service</p>
-            <h3 id="recommendationService"></h3>
-            <p id="recommendationReason"></p>
-          </div>
-
-          <div class="recommendation-card__scope">
-            <p class="eyebrow" data-recommendation-text="scope">Likely scope</p>
-            <ul id="recommendationScope"></ul>
-          </div>
-        </div>
-
-        <div class="recommendation-summary">
-          <div class="recommendation-summary__heading">
-            <p class="eyebrow" data-recommendation-text="snapshot">Project snapshot</p>
-            <div class="recommendation-actions">
-              <button class="button button--primary recommendation-actions__primary" id="recommendationDiscuss"
-                type="button">
-                <span data-recommendation-text="discuss">Discuss project</span>
-                <span aria-hidden="true">→</span>
-              </button>
-              <button class="recommendation-actions__secondary" id="recommendationEdit" type="button">
-                <span data-recommendation-text="edit">Edit brief</span>
-                <span aria-hidden="true">↗</span>
-              </button>
-            </div>
-          </div>
-          <dl id="recommendationSnapshot"></dl>
-        </div>
-
-        <p class="recommendation-note" data-recommendation-text="note">
-          This is an initial recommendation, not a final proposal or cost estimate.
-        </p>
-      </section>
-
-
-      <section class="contact-section" id="contact">
-        <div class="contact-section__heading">
-          <div>
-            <p class="eyebrow" data-contact-text="eyebrow">09 / Contact</p>
-            <h2 data-contact-text="title">Send your project brief</h2>
-          </div>
-          <p data-contact-text="intro">
-            Share your contact details. Your brief and recommendation will be attached automatically.
-          </p>
-        </div>
-
-        <div class="contact-layout">
-          <form class="contact-form" id="contactForm" novalidate>
-            <div class="contact-form__grid">
-              <label class="contact-field">
-                <span data-contact-text="name">Name</span>
-                <input type="text" name="name" autocomplete="name" required>
-              </label>
-
-              <label class="contact-field">
-                <span data-contact-text="email">Email</span>
-                <input type="email" name="email" autocomplete="email" required>
-              </label>
-
-              <label class="contact-field">
-                <span data-contact-text="phone">Phone or Telegram</span>
-                <input type="text" name="phone" autocomplete="tel">
-              </label>
-
-              <label class="contact-field">
-                <span data-contact-text="contactMethod">Preferred contact method</span>
-                <select name="contactMethod" required>
-                  <option value="" data-contact-text="choose">Choose</option>
-                  <option value="email">Email</option>
-                  <option value="telegram">Telegram</option>
-                  <option value="whatsapp">WhatsApp</option>
-                </select>
-              </label>
-
-              <label class="contact-field">
-                <span data-contact-text="language">Preferred language</span>
-                <select name="language" required>
-                  <option value="en">English</option>
-                  <option value="es">Español</option>
-                  <option value="ru">Русский</option>
-                </select>
-              </label>
-
-              <label class="contact-field contact-field--wide">
-                <span data-contact-text="message">Anything else you would like to add?</span>
-                <textarea name="message" rows="5"></textarea>
-              </label>
-            </div>
-
-            <div class="contact-form__footer">
-              <p data-contact-text="privacy">
-                By sending this form, you agree that FORMA Studio may contact you about this project.
-              </p>
-
-              <button class="button button--primary" type="submit">
-                <span data-contact-text="submit">Send brief</span>
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-
-            <p class="contact-form__status" id="contactStatus" hidden></p>
-          </form>
-
-          <aside class="contact-summary">
-            <p class="eyebrow" data-contact-text="summary">Attached to your request</p>
-            <dl id="contactSummary"></dl>
-          </aside>
-        </div>
-      </section>
-
-
-
-      <section class="confirmation-section" id="confirmation" hidden>
-        <div class="confirmation-panel">
-          <div class="confirmation-panel__mark" aria-hidden="true">
-            <span>✓</span>
-          </div>
-
-          <div class="confirmation-panel__content">
-            <p class="eyebrow" data-confirmation-text="eyebrow">10 / Confirmation</p>
-            <h2 data-confirmation-text="title">Your project brief has been sent</h2>
-            <p data-confirmation-text="intro">
-              Thank you. FORMA Studio has received your project details and contact information.
-            </p>
-
-            <div class="confirmation-steps">
-              <article>
-                <span>01</span>
-                <h3 data-confirmation-text="stepOneTitle">We review the brief</h3>
-                <p data-confirmation-text="stepOneText">
-                  We look at the project stage, priorities, budget and visual direction.
-                </p>
-              </article>
-
-              <article>
-                <span>02</span>
-                <h3 data-confirmation-text="stepTwoTitle">We confirm the right format</h3>
-                <p data-confirmation-text="stepTwoText">
-                  The initial recommendation is checked against the scope and location.
-                </p>
-              </article>
-
-              <article>
-                <span>03</span>
-                <h3 data-confirmation-text="stepThreeTitle">We contact you</h3>
-                <p data-confirmation-text="stepThreeText">
-                  You will receive a personal response using your preferred contact method.
-                </p>
-              </article>
-            </div>
-
-            <p class="confirmation-panel__timing" data-confirmation-text="timing">
-              Typical response time: within 1–2 business days.
-            </p>
-
-            <div class="confirmation-actions">
-              <a class="button button--primary" href="#projects">
-                <span data-confirmation-text="projectsButton">Return to projects</span>
-                <span aria-hidden="true">→</span>
-              </a>
-
-              <button class="confirmation-actions__secondary" id="confirmationRestart" type="button">
-                <span data-confirmation-text="restartButton">Start a new brief</span>
-                <span aria-hidden="true">↗</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="studio-section" id="studio">
+<section class="studio-section" id="studio">
         <div class="studio-section__heading">
           <div>
-            <p class="eyebrow" data-studio-text="eyebrow">10 / Studio</p>
+            <p class="eyebrow" data-studio-text="eyebrow">02 / Studio</p>
             <h2 data-studio-text="title">Interior architecture shaped by context</h2>
           </div>
 
@@ -555,6 +209,354 @@
         </div>
       </section>
 
+
+      <section class="visual-direction-section" id="visual-direction">
+        <div class="section-heading section-heading--light">
+          <div>
+            <p class="eyebrow" data-i18n="visual.eyebrow">03 / Visual Direction</p>
+            <h2 data-i18n="visual.title">Find your visual direction</h2>
+          </div>
+          <p class="section-heading__intro" data-i18n="visual.intro">
+            Choose the atmospheres, contrasts and materials that feel closest to your project.
+          </p>
+        </div>
+
+        <div class="visual-builder" id="visualBuilder">
+          <section class="visual-step" data-visual-step="1">
+            <div class="visual-step__heading">
+              <span>01</span>
+              <div>
+                <h3 data-i18n="visual.atmosphereTitle">Choose up to three atmospheres</h3>
+                <p data-i18n="visual.atmosphereHint">Select the words that best describe how the space should feel.</p>
+              </div>
+            </div>
+            <div class="atmosphere-grid" id="atmosphereOptions"></div>
+          </section>
+
+          <section class="visual-step" data-visual-step="2">
+            <div class="visual-step__heading">
+              <span>02</span>
+              <div>
+                <h3 data-i18n="visual.contrastTitle">Choose between visual contrasts</h3>
+                <p data-i18n="visual.contrastHint">There is no right answer — choose what feels more natural to you.</p>
+              </div>
+            </div>
+            <div class="contrast-grid" id="contrastOptions"></div>
+          </section>
+
+          <section class="visual-step" data-visual-step="3">
+            <div class="visual-step__heading">
+              <span>03</span>
+              <div>
+                <h3 data-i18n="visual.materialTitle">Select up to four materials</h3>
+                <p data-i18n="visual.materialHint">Choose the surfaces and finishes you would like to explore.</p>
+              </div>
+            </div>
+            <div class="materials-grid" id="materialOptions"></div>
+          </section>
+
+          <div class="visual-builder__actions">
+            <button class="button button--primary" id="visualResultButton" type="button">
+              <span data-i18n="visual.showResult">Show my direction</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <button class="visual-reset" id="visualResetButton" type="button" data-i18n="visual.reset">
+              Reset choices
+            </button>
+          </div>
+
+          <section class="visual-result" id="visualResult" hidden>
+            <div class="visual-result__image" id="visualResultImage"></div>
+            <div class="visual-result__content">
+              <p class="eyebrow" data-i18n="visual.resultEyebrow">Your visual direction</p>
+              <h3 id="visualResultTitle"></h3>
+              <p id="visualResultDescription"></p>
+
+              <div class="visual-result__summary">
+                <div>
+                  <span data-i18n="visual.summaryAtmosphere">Atmosphere</span>
+                  <p id="visualResultAtmospheres"></p>
+                </div>
+                <div>
+                  <span data-i18n="visual.summaryMaterials">Materials</span>
+                  <p id="visualResultMaterials"></p>
+                </div>
+              </div>
+
+              <p class="visual-result__note" data-i18n="visual.resultNote">
+                This direction will be saved and added to your project brief.
+              </p>
+
+              <a class="button button--secondary visual-result__cta" href="#brief">
+                <span data-i18n="visual.continueBrief">Continue to project brief</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="services-section" id="services">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="services.eyebrow">04 / Services</p>
+            <h2 data-i18n="services.title">Choose the outcome</h2>
+          </div>
+          <p class="section-heading__intro" data-i18n="services.intro">
+            Start with what you need to achieve. We will define the right level of support around your project.
+          </p>
+        </div>
+
+        <div class="services-list" id="servicesList"></div>
+
+        <div class="services-cta">
+          <p data-i18n="services.ctaText">
+            Not sure which service fits your project?
+          </p>
+
+          <a class="button button--primary" href="#brief">
+            <span data-i18n="services.ctaButton">Build your brief</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+      <section class="process-section" id="process">
+        <div class="section-heading section-heading--light">
+          <div>
+            <p class="eyebrow" data-i18n="process.eyebrow">05 / Process</p>
+            <h2 data-i18n="process.title">A clear process</h2>
+          </div>
+          <p class="section-heading__intro" data-i18n="process.intro">Each stage answers a different question and
+            produces a clear next step.</p>
+        </div>
+        <div class="process-list" id="processList"></div>
+        <div class="process-note">
+          <p data-i18n="process.note">The exact scope and sequence are adapted to the project, location and selected
+            service.</p>
+        </div>
+      </section>
+
+      <section class="brief-section" id="brief">
+        <div class="brief-section__heading">
+          <div>
+            <p class="eyebrow" data-brief-text="eyebrow">06 / Project Brief</p>
+            <h2 data-brief-text="title">Build your project brief</h2>
+          </div>
+          <p data-brief-text="intro">
+            Answer a few focused questions so we can understand your space, priorities and project stage.
+          </p>
+        </div>
+
+        <div class="brief-app" id="briefApp">
+          <div class="brief-progress" aria-label="Brief progress">
+            <div class="brief-progress__meta">
+              <span data-brief-text="progress">Progress</span>
+              <span id="briefProgressText">1 / 5</span>
+            </div>
+            <div class="brief-progress__line"><span id="briefProgressFill"></span></div>
+          </div>
+
+          <div class="brief-step" id="briefStep"></div>
+
+          <div class="brief-actions">
+            <button class="brief-back" id="briefBack" type="button">
+              <span aria-hidden="true">←</span>
+              <span data-brief-text="back">Back</span>
+            </button>
+            <button class="button button--primary" id="briefNext" type="button">
+              <span id="briefNextText">Continue</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <p class="brief-error" id="briefError" hidden></p>
+        </div>
+      </section>
+
+
+      <section class="recommendation-section" id="recommendation" hidden>
+        <div class="recommendation-section__heading">
+          <p class="eyebrow" data-recommendation-text="eyebrow">07 / Recommendation</p>
+          <h2 data-recommendation-text="title">A clear next step for your project</h2>
+          <p data-recommendation-text="intro">
+            Based on your answers, this is the most suitable starting point.
+          </p>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="recommendation-card__primary">
+            <p class="eyebrow" data-recommendation-text="recommended">Recommended service</p>
+            <h3 id="recommendationService"></h3>
+            <p id="recommendationReason"></p>
+          </div>
+
+          <div class="recommendation-card__scope">
+            <p class="eyebrow" data-recommendation-text="scope">Likely scope</p>
+            <ul id="recommendationScope"></ul>
+          </div>
+        </div>
+
+        <div class="recommendation-summary">
+          <div class="recommendation-summary__heading">
+            <p class="eyebrow" data-recommendation-text="snapshot">Project snapshot</p>
+            <div class="recommendation-actions">
+              <button class="button button--primary recommendation-actions__primary" id="recommendationDiscuss"
+                type="button">
+                <span data-recommendation-text="discuss">Discuss project</span>
+                <span aria-hidden="true">→</span>
+              </button>
+              <button class="recommendation-actions__secondary" id="recommendationEdit" type="button">
+                <span data-recommendation-text="edit">Edit brief</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+          <dl id="recommendationSnapshot"></dl>
+        </div>
+
+        <p class="recommendation-note" data-recommendation-text="note">
+          This is an initial recommendation, not a final proposal or cost estimate.
+        </p>
+      </section>
+
+
+      <section class="contact-section" id="contact">
+        <div class="contact-section__heading">
+          <div>
+            <p class="eyebrow" data-contact-text="eyebrow">08 / Contact</p>
+            <h2 data-contact-text="title">Send your project brief</h2>
+          </div>
+          <p data-contact-text="intro">
+            Share your contact details. Your brief and recommendation will be attached automatically.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="contact-form__grid">
+              <label class="contact-field">
+                <span data-contact-text="name">Name</span>
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="email">Email</span>
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="phone">Phone or Telegram</span>
+                <input type="text" name="phone" autocomplete="tel">
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="contactMethod">Preferred contact method</span>
+                <select name="contactMethod" required>
+                  <option value="" data-contact-text="choose">Choose</option>
+                  <option value="email">Email</option>
+                  <option value="telegram">Telegram</option>
+                  <option value="whatsapp">WhatsApp</option>
+                </select>
+              </label>
+
+              <label class="contact-field">
+                <span data-contact-text="language">Preferred language</span>
+                <select name="language" required>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="ru">Русский</option>
+                </select>
+              </label>
+
+              <label class="contact-field contact-field--wide">
+                <span data-contact-text="message">Anything else you would like to add?</span>
+                <textarea name="message" rows="5"></textarea>
+              </label>
+            </div>
+
+            <div class="contact-form__footer">
+              <p data-contact-text="privacy">
+                By sending this form, you agree that FORMA Studio may contact you about this project.
+              </p>
+
+              <button class="button button--primary" type="submit">
+                <span data-contact-text="submit">Send brief</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <p class="contact-form__status" id="contactStatus" hidden></p>
+          </form>
+
+          <aside class="contact-summary">
+            <p class="eyebrow" data-contact-text="summary">Attached to your request</p>
+            <dl id="contactSummary"></dl>
+          </aside>
+        </div>
+      </section>
+
+
+
+      <section class="confirmation-section" id="confirmation" hidden>
+        <div class="confirmation-panel">
+          <div class="confirmation-panel__mark" aria-hidden="true">
+            <span>✓</span>
+          </div>
+
+          <div class="confirmation-panel__content">
+            <p class="eyebrow" data-confirmation-text="eyebrow">Confirmation</p>
+            <h2 data-confirmation-text="title">Your project brief has been sent</h2>
+            <p data-confirmation-text="intro">
+              Thank you. FORMA Studio has received your project details and contact information.
+            </p>
+
+            <div class="confirmation-steps">
+              <article>
+                <span>01</span>
+                <h3 data-confirmation-text="stepOneTitle">We review the brief</h3>
+                <p data-confirmation-text="stepOneText">
+                  We look at the project stage, priorities, budget and visual direction.
+                </p>
+              </article>
+
+              <article>
+                <span>02</span>
+                <h3 data-confirmation-text="stepTwoTitle">We confirm the right format</h3>
+                <p data-confirmation-text="stepTwoText">
+                  The initial recommendation is checked against the scope and location.
+                </p>
+              </article>
+
+              <article>
+                <span>03</span>
+                <h3 data-confirmation-text="stepThreeTitle">We contact you</h3>
+                <p data-confirmation-text="stepThreeText">
+                  You will receive a personal response using your preferred contact method.
+                </p>
+              </article>
+            </div>
+
+            <p class="confirmation-panel__timing" data-confirmation-text="timing">
+              Typical response time: within 1–2 business days.
+            </p>
+
+            <div class="confirmation-actions">
+              <a class="button button--primary" href="#projects">
+                <span data-confirmation-text="projectsButton">Return to projects</span>
+                <span aria-hidden="true">→</span>
+              </a>
+
+              <button class="confirmation-actions__secondary" id="confirmationRestart" type="button">
+                <span data-confirmation-text="restartButton">Start a new brief</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+
     </main>
 
     <section class="project-detail" id="projectDetail" aria-hidden="true">
@@ -594,6 +596,8 @@
     defer></script>
   <script src="{{ url_for('static', filename='js/app.js') }}" defer>
   </script>
+  <script src="{{ url_for('static', filename='js/section-order.js') }}"
+    defer></script>
 </body>
 
 </html>

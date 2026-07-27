@@ -1,0 +1,216 @@
+
+/*
+  FORMA Studio — final visual polish
+  Loaded after style.css so these rules safely override the current design.
+*/
+
+/* ---------- Shared section hierarchy ---------- */
+
+.projects-section .section-heading h2,
+.visual-direction-section .section-heading h2,
+.services-section .section-heading h2,
+.process-section .section-heading h2,
+.brief-section__heading h2,
+.recommendation-section__heading h2,
+.contact-section__heading h2,
+.studio-section__heading h2,
+.confirmation-panel__content h2 {
+  max-width: 820px;
+  font-size: clamp(38px, 4.8vw, 60px);
+  line-height: 1.04;
+}
+
+.section-heading__intro,
+.brief-section__heading > p,
+.recommendation-section__heading > p:last-child,
+.contact-section__heading > p,
+.studio-section__heading > p,
+.confirmation-panel__content > p:nth-of-type(2) {
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.65;
+}
+
+/* ---------- Services ---------- */
+
+.service-card__heading h3,
+.services-list h3 {
+  max-width: 1050px;
+  font-size: clamp(32px, 3.8vw, 54px);
+  line-height: 1.04;
+}
+
+.service-card__heading p {
+  max-width: 920px;
+  margin-top: 16px;
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.58;
+}
+
+.service-card__body > p {
+  font-size: clamp(16px, 1.18vw, 19px);
+  line-height: 1.7;
+}
+
+/* ---------- Process ---------- */
+
+.process-item__heading h3 {
+  max-width: 760px;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.02;
+}
+
+.process-item__heading p {
+  max-width: 820px;
+  margin-top: 14px;
+  font-size: clamp(16px, 1.2vw, 19px);
+  line-height: 1.55;
+}
+
+.process-item__details > p {
+  max-width: 780px;
+  font-size: clamp(16px, 1.25vw, 20px);
+  line-height: 1.68;
+}
+
+.process-item__result strong {
+  display: block;
+  max-width: 620px;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.1;
+}
+
+/* ---------- Studio ---------- */
+
+.studio-editorial__statement > p:last-child {
+  max-width: 680px;
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.42;
+}
+
+.studio-facts h3 {
+  font-size: clamp(23px, 2.2vw, 31px);
+  line-height: 1.12;
+}
+
+.studio-facts p {
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+/* ---------- Internal project pages ---------- */
+
+.project-detail__title {
+  max-width: 1050px;
+  font-size: clamp(46px, 6vw, 78px);
+  line-height: .98;
+}
+
+.project-detail__lead {
+  max-width: 900px;
+  font-size: clamp(18px, 1.8vw, 25px);
+  line-height: 1.55;
+}
+
+.project-detail__gallery {
+  width: min(100%, 1380px);
+  margin-inline: auto;
+}
+
+.project-detail__image--1,
+.project-detail__image--4 {
+  max-height: 680px;
+}
+
+.project-detail__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-detail__intro {
+  max-width: 760px;
+  font-size: clamp(20px, 2.1vw, 29px);
+  line-height: 1.45;
+}
+
+.project-detail__cta p {
+  max-width: 620px;
+  font-size: clamp(30px, 3.8vw, 46px);
+  line-height: 1.08;
+}
+
+/* ---------- Recommendation / confirmation ---------- */
+
+.recommendation-card__primary h3 {
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.05;
+}
+
+.confirmation-steps h3 {
+  font-size: clamp(23px, 2.3vw, 31px);
+  line-height: 1.12;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 720px) {
+  .projects-section,
+  .visual-direction-section,
+  .services-section,
+  .process-section,
+  .brief-section,
+  .recommendation-section,
+  .contact-section,
+  .studio-section,
+  .confirmation-section {
+    padding-top: 76px;
+    padding-bottom: 84px;
+  }
+
+  .projects-section .section-heading h2,
+  .visual-direction-section .section-heading h2,
+  .services-section .section-heading h2,
+  .process-section .section-heading h2,
+  .brief-section__heading h2,
+  .recommendation-section__heading h2,
+  .contact-section__heading h2,
+  .studio-section__heading h2,
+  .confirmation-panel__content h2 {
+    font-size: clamp(34px, 10vw, 46px);
+    line-height: 1.05;
+  }
+
+  .service-card__heading h3,
+  .services-list h3 {
+    font-size: clamp(31px, 9vw, 43px);
+  }
+
+  .process-item__heading h3 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+
+  .process-item__result strong {
+    font-size: clamp(27px, 8vw, 38px);
+  }
+
+  .project-detail__title {
+    font-size: clamp(42px, 12vw, 58px);
+  }
+
+  .project-detail__lead {
+    font-size: 18px;
+  }
+
+  .project-detail__gallery {
+    width: 100%;
+  }
+
+  .project-detail__image--1,
+  .project-detail__image--4 {
+    max-height: none;
+  }
+
+  .studio-editorial__statement > p:last-child {
+    font-size: clamp(20px, 6.5vw, 26px);
+  }
+}

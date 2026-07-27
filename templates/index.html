@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -7,26 +8,37 @@
   <title>FORMA Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/visual-polish.css') }}">
 </head>
+
 <body>
   <div class="app-shell">
     <header class="site-header">
       <a class="site-logo" href="#home" aria-label="FORMA Studio">FORMA</a>
       <div class="header-actions">
         <div class="language-selector">
-          <button class="language-selector__toggle" id="languageToggle" type="button" aria-expanded="false" aria-controls="languageMenu">
+          <button class="language-selector__toggle" id="languageToggle" type="button" aria-expanded="false"
+            aria-controls="languageMenu">
             <span id="currentLanguage">EN</span><span class="language-selector__arrow" aria-hidden="true">↓</span>
           </button>
           <div class="language-selector__menu" id="languageMenu" hidden>
             <p class="language-selector__label" data-i18n="language.label">Language</p>
-            <button class="language-option" type="button" data-language="en"><span>English</span><span>01</span></button>
-            <button class="language-option" type="button" data-language="es"><span>Español</span><span>02</span></button>
-            <button class="language-option" type="button" data-language="ru"><span>Русский</span><span>03</span></button>
+            <button class="language-option" type="button"
+              data-language="en"><span>English</span><span>01</span></button>
+            <button class="language-option" type="button"
+              data-language="es"><span>Español</span><span>02</span></button>
+            <button class="language-option" type="button"
+              data-language="ru"><span>Русский</span><span>03</span></button>
           </div>
         </div>
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteMenu">
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
+          aria-controls="siteMenu">
           <span></span><span></span>
         </button>
       </div>
@@ -40,7 +52,8 @@
         </div>
         <div class="site-menu__links">
           <a href="#projects" data-menu-link><span>01</span><span data-i18n="nav.projects">Selected Work</span></a>
-          <a href="#visual-direction" data-menu-link><span>02</span><span data-i18n="nav.visual">Visual Direction</span></a>
+          <a href="#visual-direction" data-menu-link><span>02</span><span data-i18n="nav.visual">Visual
+              Direction</span></a>
           <a href="#services" data-menu-link><span>03</span><span data-i18n="nav.services">Services</span></a>
           <a href="#process" data-menu-link><span>04</span><span data-i18n="nav.process">Process</span></a>
           <a href="#brief" data-menu-link><span>05</span><span data-i18n="nav.brief">Build Your Brief</span></a>
@@ -64,10 +77,13 @@
           </div>
           <div class="hero__main">
             <h1 data-i18n="hero.title">Spaces shaped around how you live.</h1>
-            <p class="hero__description" data-i18n="hero.description">We design residential and selected commercial interiors with a focus on space, materiality and everyday use.</p>
+            <p class="hero__description" data-i18n="hero.description">We design residential and selected commercial
+              interiors with a focus on space, materiality and everyday use.</p>
             <div class="hero__actions">
-              <a class="button button--primary" href="#brief"><span data-i18n="global.primaryCta">Build Your Project Brief</span><span aria-hidden="true">→</span></a>
-              <a class="button button--secondary" href="#projects"><span data-i18n="global.secondaryCta">View Selected Work</span><span aria-hidden="true">↘</span></a>
+              <a class="button button--primary" href="#brief"><span data-i18n="global.primaryCta">Build Your Project
+                  Brief</span><span aria-hidden="true">→</span></a>
+              <a class="button button--secondary" href="#projects"><span data-i18n="global.secondaryCta">View Selected
+                  Work</span><span aria-hidden="true">↘</span></a>
             </div>
           </div>
           <div class="hero__footer">
@@ -82,12 +98,13 @@
             <p class="eyebrow" data-i18n="projects.eyebrow">03 / Selected Work</p>
             <h2 data-i18n="projects.title">Selected spaces</h2>
           </div>
-          <p class="section-heading__intro" data-i18n="projects.intro">Residential and commercial interiors shaped by place, material and everyday use.</p>
+          <p class="section-heading__intro" data-i18n="projects.intro">Residential and commercial interiors shaped by
+            place, material and everyday use.</p>
         </div>
         <div class="projects-list" id="projectsList"></div>
       </section>
 
-      
+
       <section class="visual-direction-section" id="visual-direction">
         <div class="section-heading section-heading--light">
           <div>
@@ -173,7 +190,7 @@
           </section>
         </div>
       </section>
-      
+
       <section class="services-section" id="services">
         <div class="section-heading">
           <div>
@@ -199,14 +216,21 @@
         </div>
       </section>
       <section class="process-section" id="process">
-  <div class="section-heading section-heading--light">
-    <div><p class="eyebrow" data-i18n="process.eyebrow">06 / Process</p><h2 data-i18n="process.title">A clear process</h2></div>
-    <p class="section-heading__intro" data-i18n="process.intro">Each stage answers a different question and produces a clear next step.</p>
-  </div>
-  <div class="process-list" id="processList"></div>
-  <div class="process-note"><p data-i18n="process.note">The exact scope and sequence are adapted to the project, location and selected service.</p></div>
-</section>
-      
+        <div class="section-heading section-heading--light">
+          <div>
+            <p class="eyebrow" data-i18n="process.eyebrow">06 / Process</p>
+            <h2 data-i18n="process.title">A clear process</h2>
+          </div>
+          <p class="section-heading__intro" data-i18n="process.intro">Each stage answers a different question and
+            produces a clear next step.</p>
+        </div>
+        <div class="process-list" id="processList"></div>
+        <div class="process-note">
+          <p data-i18n="process.note">The exact scope and sequence are adapted to the project, location and selected
+            service.</p>
+        </div>
+      </section>
+
       <section class="brief-section" id="brief">
         <div class="brief-section__heading">
           <div>
@@ -244,7 +268,7 @@
         </div>
       </section>
 
-      
+
       <section class="recommendation-section" id="recommendation" hidden>
         <div class="recommendation-section__heading">
           <p class="eyebrow" data-recommendation-text="eyebrow">08 / Recommendation</p>
@@ -271,7 +295,8 @@
           <div class="recommendation-summary__heading">
             <p class="eyebrow" data-recommendation-text="snapshot">Project snapshot</p>
             <div class="recommendation-actions">
-              <button class="button button--primary recommendation-actions__primary" id="recommendationDiscuss" type="button">
+              <button class="button button--primary recommendation-actions__primary" id="recommendationDiscuss"
+                type="button">
                 <span data-recommendation-text="discuss">Discuss project</span>
                 <span aria-hidden="true">→</span>
               </button>
@@ -289,7 +314,7 @@
         </p>
       </section>
 
-      
+
       <section class="contact-section" id="contact">
         <div class="contact-section__heading">
           <div>
@@ -365,8 +390,8 @@
         </div>
       </section>
 
-      
-      
+
+
       <section class="confirmation-section" id="confirmation" hidden>
         <div class="confirmation-panel">
           <div class="confirmation-panel__mark" aria-hidden="true">
@@ -442,9 +467,7 @@
           <figure class="studio-editorial__image">
             <img
               src="{{ url_for('static', filename='images/approach_detail.webp') }}"
-              alt="FORMA Studio interior architecture detail"
-              loading="lazy"
-            >
+              alt="FORMA Studio interior architecture detail" loading="lazy">
           </figure>
 
           <div class="studio-editorial__statement">
@@ -534,17 +557,9 @@
 
     </main>
 
-    <section
-      class="project-detail"
-      id="projectDetail"
-      aria-hidden="true"
-    >
+    <section class="project-detail" id="projectDetail" aria-hidden="true">
       <div class="project-detail__bar">
-        <button
-          class="project-detail__back"
-          id="projectDetailBack"
-          type="button"
-        >
+        <button class="project-detail__back" id="projectDetailBack" type="button">
           <span aria-hidden="true">←</span>
           <span data-i18n="projects.back">Back to projects</span>
         </button>
@@ -557,16 +572,28 @@
 
   </div>
 
-  <script src="{{ url_for('static', filename='js/translations.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/projects.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/visual-direction.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/services.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/process.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/brief.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/recommendation.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/contact.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/studio.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/confirmation.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}"
+    defer></script>
+  <script src="{{ url_for('static', filename='js/projects.js') }}" defer>
+  </script>
+  <script src="{{ url_for('static', filename='js/visual-direction.js') }}"
+    defer></script>
+  <script src="{{ url_for('static', filename='js/services.js') }}" defer>
+  </script>
+  <script src="{{ url_for('static', filename='js/process.js') }}" defer>
+  </script>
+  <script src="{{ url_for('static', filename='js/brief.js') }}" defer>
+  </script>
+  <script src="{{ url_for('static', filename='js/recommendation.js') }}"
+    defer></script>
+  <script src="{{ url_for('static', filename='js/contact.js') }}" defer>
+  </script>
+  <script src="{{ url_for('static', filename='js/studio.js') }}" defer>
+  </script>
+  <script src="{{ url_for('static', filename='js/confirmation.js') }}"
+    defer></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer>
+  </script>
 </body>
+
 </html>

@@ -182,8 +182,11 @@ def handle_telegram_update(update: dict[str, Any]) -> None:
             chat_id=chat_id,
             text=(
                 f"{greeting}\n\n"
-                "Explore selected interior projects, define your visual direction "
-                "and create a structured project brief with FORMA Studio."
+                "This is a demo Mini App concept for an interior architecture "
+                "and renovation studio.\n\n"
+                "Inside you can explore selected projects, define a visual direction, "
+                "review services and create a structured project brief.\n\n"
+                "Choose how you would like to open FORMA Studio."
             ),
             button_text="Open Studio",
             url=webapp_url,
@@ -219,7 +222,7 @@ def send_web_app_message(
     button_text: str,
     url: str,
 ) -> None:
-    """Send a Telegram message with a Web App inline button."""
+    """Send buttons for opening the app inside Telegram or in a browser."""
     telegram_api(
         "sendMessage",
         {
@@ -232,7 +235,13 @@ def send_web_app_message(
                             "text": button_text,
                             "web_app": {"url": url},
                         }
-                    ]
+                    ],
+                    [
+                        {
+                            "text": "Open in browser ↗",
+                            "url": url,
+                        }
+                    ],
                 ]
             },
         },

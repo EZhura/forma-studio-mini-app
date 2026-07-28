@@ -1497,3 +1497,103 @@ label,
     max-width: 31rem;
   }
 }
+
+/* ---------- Final mobile header clearance and contrast ---------- */
+
+@media (max-width: 480px) {
+
+  /* Верхняя панель сайта должна иметь собственный слой */
+
+  .site-header,
+  .project-detail__header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    background: #181816 !important;
+  }
+
+  /* Контент секций не должен заходить под шапку */
+
+  .hero,
+  .projects-section,
+  .studio-section,
+  .visual-direction-section,
+  .services-section,
+  .process-section,
+  .brief-section,
+  .recommendation-section,
+  .contact-section,
+  .confirmation-section,
+  .project-detail {
+    scroll-margin-top: 92px !important;
+  }
+
+  .section-header,
+  .section-intro,
+  .project-detail__content,
+  .brief-section__inner,
+  .recommendation-section__inner,
+  .contact-section__inner {
+    padding-top: 20px !important;
+  }
+
+  /* Служебные подписи на тёмном фоне */
+
+  .eyebrow,
+  .section-index,
+  .project-meta,
+  .project-detail__meta,
+  .field-label,
+  .optional-label,
+  .summary-label,
+  .brief-progress__label,
+  .service-card__label,
+  .recommendation-card__label,
+  .back-link,
+  .section-link {
+    color: rgba(232, 227, 218, 0.82) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.035em !important;
+  }
+
+  /* Служебные подписи на светлом фоне */
+
+  .visual-direction-section .eyebrow,
+  .visual-direction-section .section-index,
+  .process-section .eyebrow,
+  .process-section .section-index,
+  .recommendation-section .eyebrow,
+  .recommendation-section .summary-label {
+    color: rgba(24, 24, 22, 0.72) !important;
+  }
+
+  /* Основной текст на светлом фоне */
+
+  .visual-direction-section p,
+  .process-section p,
+  .recommendation-section p,
+  .recommendation-section li {
+    color: rgba(24, 24, 22, 0.92) !important;
+  }
+
+  /* Линии и рамки */
+
+  .brief-section .option,
+  .brief-section .choice-option,
+  .brief-section .brief-option,
+  .brief-card,
+  .recommendation-card,
+  .process-stage,
+  .approach-card,
+  .contact-form__field {
+    border-color: rgba(232, 227, 218, 0.38) !important;
+    border-width: 1.5px !important;
+  }
+
+  .visual-direction-section .process-stage,
+  .visual-direction-section .approach-card,
+  .process-section .process-stage,
+  .recommendation-section .recommendation-card {
+    border-color: rgba(24, 24, 22, 0.28) !important;
+  }
+}

@@ -1106,14 +1106,65 @@ label,
   }
 
   .visual-direction-section,
-  .brief-section,
   .recommendation-section {
     color: #181816;
   }
 
   .visual-direction-section p,
-  .brief-section p,
   .recommendation-section p {
     color: rgba(24, 24, 22, 0.78) !important;
+  }
+}
+
+/* ---------- Restore text visibility in mobile brief ---------- */
+
+@media (max-width: 480px) {
+  .brief-section {
+    color: #e8e3da !important;
+  }
+
+  .brief-section h1,
+  .brief-section h2,
+  .brief-section h3,
+  .brief-section p,
+  .brief-section label,
+  .brief-section legend,
+  .brief-section .brief-title,
+  .brief-section .brief-step__title,
+  .brief-section .brief-step__description,
+  .brief-section .field-label,
+  .brief-section .option-label {
+    color: rgba(232, 227, 218, 0.92) !important;
+  }
+
+  .brief-section .eyebrow,
+  .brief-section .section-index,
+  .brief-section .brief-progress,
+  .brief-section .brief-progress__label {
+    color: rgba(232, 227, 218, 0.68) !important;
+  }
+
+  /* Выбранные светлые варианты должны оставаться тёмными */
+
+  .brief-section .is-selected,
+  .brief-section .is-selected span,
+  .brief-section .is-selected label {
+    color: #181816 !important;
+  }
+
+  .brief-section input,
+  .brief-section textarea,
+  .brief-section select {
+    color: #e8e3da !important;
+  }
+
+  .brief-section input::placeholder,
+  .brief-section textarea::placeholder {
+    color: rgba(232, 227, 218, 0.48) !important;
+  }
+
+  .brief-section button.button--primary,
+  .brief-section .button--primary {
+    color: #181816 !important;
   }
 }

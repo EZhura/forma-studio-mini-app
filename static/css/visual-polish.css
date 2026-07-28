@@ -1502,31 +1502,7 @@ label,
 
 @media (max-width: 480px) {
 
-  /* Верхняя панель сайта должна иметь собственный слой */
 
-  .site-header,
-  .project-detail__header {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 100 !important;
-    background: #181816 !important;
-  }
-
-  /* Контент секций не должен заходить под шапку */
-
-  .hero,
-  .projects-section,
-  .studio-section,
-  .visual-direction-section,
-  .services-section,
-  .process-section,
-  .brief-section,
-  .recommendation-section,
-  .contact-section,
-  .confirmation-section,
-  .project-detail {
-    scroll-margin-top: 92px !important;
-  }
 
   .section-header,
   .section-intro,
@@ -1595,5 +1571,120 @@ label,
   .process-section .process-stage,
   .recommendation-section .recommendation-card {
     border-color: rgba(24, 24, 22, 0.28) !important;
+  }
+}
+
+/* ---------- Mobile layout and secondary text refinement ---------- */
+
+@media (max-width: 480px) {
+
+  /* Компактная шапка сайта внутри Telegram */
+
+  .site-header,
+  .project-detail__header {
+    position: relative !important;
+    top: auto !important;
+    min-height: 88px !important;
+    height: auto !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    background: #181816 !important;
+    z-index: 20 !important;
+  }
+
+  /* Убираем лишнюю высоту внутренних контейнеров шапки */
+
+  .site-header__inner,
+  .header-inner,
+  .project-detail__header-inner {
+    min-height: 48px !important;
+    height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Содержание начинается сразу после шапки */
+
+  .section-header,
+  .section-intro,
+  .project-detail__content,
+  .brief-section__inner,
+  .recommendation-section__inner,
+  .contact-section__inner {
+    padding-top: 28px !important;
+  }
+
+  /* Поясняющий текст на тёмном фоне */
+
+  .services-section p,
+  .service-card p,
+  .service-card li,
+  .service-card__details,
+  .studio-section p,
+  .approach-card p,
+  .brief-section p,
+  .brief-section label {
+    color: rgba(232, 227, 218, 0.94) !important;
+    font-weight: 400 !important;
+  }
+
+  /* Списки внутри раскрытой услуги */
+
+  .service-card li,
+  .service-card__details li,
+  .service-card__included li {
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Служебные подписи на тёмном фоне */
+
+  .services-section .eyebrow,
+  .services-section .section-index,
+  .service-card__label,
+  .brief-section .field-label,
+  .brief-section .optional-label,
+  .brief-section .brief-progress__label {
+    color: rgba(232, 227, 218, 0.76) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.035em !important;
+  }
+
+  /* Текст на светлых разделах */
+
+  .visual-direction-section p,
+  .process-section p,
+  .recommendation-section p,
+  .recommendation-section li {
+    color: rgba(24, 24, 22, 0.9) !important;
+  }
+
+  /* Подписи на светлом фоне */
+
+  .visual-direction-section .eyebrow,
+  .visual-direction-section .section-index,
+  .process-section .eyebrow,
+  .process-section .section-index,
+  .recommendation-section .eyebrow,
+  .recommendation-section .summary-label,
+  .recommendation-card__label {
+    color: rgba(24, 24, 22, 0.67) !important;
+    font-weight: 600 !important;
+  }
+
+  /* Более заметные границы */
+
+  .brief-section .option,
+  .brief-section .choice-option,
+  .brief-section .brief-option,
+  .service-card,
+  .approach-card {
+    border-color: rgba(232, 227, 218, 0.36) !important;
+  }
+
+  .process-stage,
+  .recommendation-card {
+    border-color: rgba(24, 24, 22, 0.26) !important;
   }
 }

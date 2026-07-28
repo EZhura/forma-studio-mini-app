@@ -1412,3 +1412,88 @@ label,
     border-width: 1.5px !important;
   }
 }
+
+/* ---------- Final mobile contrast and header spacing ---------- */
+
+@media (max-width: 480px) {
+
+  /* Отступ под фиксированной шапкой */
+
+  main,
+  .page,
+  .app-content,
+  .section,
+  .project-detail,
+  .brief-section,
+  .recommendation-section,
+  .contact-section {
+    scroll-margin-top: 118px;
+  }
+
+  /* Служебные подписи на тёмном фоне */
+
+  .eyebrow,
+  .section-index,
+  .field-label,
+  .optional-label,
+  .summary-label,
+  .recommendation-card__label,
+  .brief-progress__label,
+  .project-meta,
+  .project-detail__meta,
+  .service-card__label {
+    color: rgba(232, 227, 218, 0.78) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  /* Служебные подписи на светлом фоне */
+
+  .visual-direction-section .eyebrow,
+  .visual-direction-section .section-index,
+  .process-section .eyebrow,
+  .process-section .section-index,
+  .recommendation-section .eyebrow,
+  .recommendation-section .summary-label {
+    color: rgba(24, 24, 22, 0.68) !important;
+  }
+
+  /* Основной текст на светлом фоне */
+
+  .visual-direction-section p,
+  .process-section p,
+  .recommendation-section p,
+  .recommendation-section li {
+    color: rgba(24, 24, 22, 0.88) !important;
+  }
+
+  /* Линии и рамки */
+
+  .brief-section .option,
+  .brief-section .choice-option,
+  .brief-section .brief-option,
+  .brief-card,
+  .recommendation-card,
+  .process-stage,
+  .approach-card {
+    border-color: rgba(232, 227, 218, 0.36) !important;
+  }
+
+  .visual-direction-section .process-stage,
+  .visual-direction-section .approach-card,
+  .process-section .process-stage,
+  .recommendation-section .recommendation-card {
+    border-color: rgba(24, 24, 22, 0.24) !important;
+  }
+
+  /* Ограничиваем ширину длинного текста */
+
+  .project-detail__description,
+  .studio-copy,
+  .service-card p,
+  .process-stage p,
+  .brief-section p,
+  .recommendation-section p {
+    max-width: 31rem;
+  }
+}

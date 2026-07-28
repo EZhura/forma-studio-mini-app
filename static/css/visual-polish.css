@@ -740,163 +740,131 @@
   }
 }
 
-/* ---------- Global mobile readability ---------- */
+/* Служебные ссылки и кнопка назад */
 
-@media (max-width: 720px) {
+.back-link,
+.project-detail__back,
+.section-link,
+.eyebrow {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.1em !important;
+}
 
-  /* Верхняя панель */
+.project-detail__back {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
 
-  .site-header,
-  .project-detail__header {
-    min-height: 64px;
-  }
+/* Заголовки внутренних экранов */
 
-  .site-logo,
-  .project-detail__brand {
-    font-size: 16px !important;
-    letter-spacing: 0.12em;
-  }
+.project-detail__title,
+.project-detail h1,
+.section-heading,
+.section-title,
+.services-title,
+.studio-title,
+.brief-title,
+.recommendation-title {
+  font-size: clamp(38px, 10vw, 48px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.02em;
+}
 
-  .language-switcher,
-  .language-selector,
-  .header-language,
-  [data-language-toggle] {
-    font-size: 15px !important;
-    line-height: 1;
-    padding: 12px 8px;
-    min-height: 44px;
-  }
+/* Заголовки карточек и подразделов */
 
-  .menu-toggle {
-    min-width: 44px;
-    min-height: 44px;
-  }
+.project-card h2,
+.project-card h3,
+.service-card h3,
+.process-stage h3,
+.brief-step h2,
+.brief-step h3 {
+  font-size: clamp(28px, 8vw, 38px) !important;
+  line-height: 1.06 !important;
+}
 
-  /* Служебные ссылки и кнопка назад */
+/* Основной текст */
 
-  .back-link,
-  .project-detail__back,
-  .section-link,
-  .eyebrow {
-    font-size: 12px !important;
-    line-height: 1.4 !important;
-    letter-spacing: 0.1em !important;
-  }
+.project-detail__description,
+.project-detail__intro,
+.section-description,
+.service-card p,
+.studio-copy,
+.process-stage p,
+.brief-step p,
+.recommendation-copy,
+.contact-copy {
+  font-size: 16px !important;
+  line-height: 1.58 !important;
+}
 
-  .project-detail__back {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
+/* Метаданные проектов */
 
-  /* Заголовки внутренних экранов */
+.project-detail__meta,
+.project-meta,
+.project-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
 
-  .project-detail__title,
-  .project-detail h1,
-  .section-heading,
-  .section-title,
-  .services-title,
-  .studio-title,
-  .brief-title,
-  .recommendation-title {
-    font-size: clamp(38px, 10vw, 48px) !important;
-    line-height: 1.02 !important;
-    letter-spacing: -0.02em;
-  }
+.project-detail__meta span,
+.project-meta span,
+.project-card__meta span {
+  font-size: 11px !important;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+}
 
-  /* Заголовки карточек и подразделов */
+/* Кнопки */
 
-  .project-card h2,
-  .project-card h3,
-  .service-card h3,
-  .process-stage h3,
-  .brief-step h2,
-  .brief-step h3 {
-    font-size: clamp(28px, 8vw, 38px) !important;
-    line-height: 1.06 !important;
-  }
+.button,
+button,
+.cta-button,
+.project-detail__cta,
+.service-card__cta,
+.brief-navigation button {
+  min-height: 52px;
+  padding: 15px 18px;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
 
-  /* Основной текст */
+/* Поля формы */
 
-  .project-detail__description,
-  .project-detail__intro,
-  .section-description,
-  .service-card p,
-  .studio-copy,
-  .process-stage p,
-  .brief-step p,
-  .recommendation-copy,
-  .contact-copy {
-    font-size: 16px !important;
-    line-height: 1.58 !important;
-  }
+input,
+select,
+textarea {
+  font-size: 16px !important;
+}
 
-  /* Метаданные проектов */
+label,
+.field-label,
+.option-label {
+  font-size: 14px !important;
+  line-height: 1.4;
+}
 
-  .project-detail__meta,
-  .project-meta,
-  .project-card__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 14px;
-  }
+/* Меню */
 
-  .project-detail__meta span,
-  .project-meta span,
-  .project-card__meta span {
-    font-size: 11px !important;
-    line-height: 1.4;
-    letter-spacing: 0.08em;
-  }
+.menu-panel a,
+.fullscreen-menu a,
+.navigation-menu a {
+  font-size: clamp(26px, 8vw, 36px) !important;
+  line-height: 1.15 !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
-  /* Кнопки */
+/* Подписи карточек Visual Direction */
 
-  .button,
-  button,
-  .cta-button,
-  .project-detail__cta,
-  .service-card__cta,
-  .brief-navigation button {
-    min-height: 52px;
-    padding: 15px 18px;
-    font-size: 13px !important;
-    line-height: 1.25 !important;
-  }
-
-  /* Поля формы */
-
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
-  }
-
-  label,
-  .field-label,
-  .option-label {
-    font-size: 14px !important;
-    line-height: 1.4;
-  }
-
-  /* Меню */
-
-  .menu-panel a,
-  .fullscreen-menu a,
-  .navigation-menu a {
-    font-size: clamp(26px, 8vw, 36px) !important;
-    line-height: 1.15 !important;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  /* Подписи карточек Visual Direction */
-
-  .contrast-option>span,
-  .material-option>span,
-  .mood-option>span {
-    font-size: 12px !important;
-    line-height: 1.3 !important;
-  }
+.contrast-option>span,
+.material-option>span,
+.mood-option>span {
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+}
 }
 
 @media (max-width: 720px) {
@@ -916,5 +884,236 @@
 
   .project-detail__gallery {
     width: calc(100% - 24px) !important;
+  }
+}
+
+/* ---------- iPhone readability: final mobile typography ---------- */
+
+@media (max-width: 480px) {
+
+  html {
+    font-size: 17px;
+  }
+
+  body {
+    font-size: 17px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Обычный текст во всех основных разделах */
+
+  p,
+  .hero__description,
+  .project-detail__description,
+  .project-detail__intro,
+  .project-card__description,
+  .studio-copy,
+  .studio-section p,
+  .approach-card p,
+  .service-card p,
+  .service-card__description,
+  .process-stage p,
+  .brief-step p,
+  .brief-card p,
+  .recommendation-copy,
+  .recommendation-card p,
+  .contact-copy,
+  .confirmation-copy,
+  .visual-direction-intro p,
+  .visual-direction-section p {
+    font-size: 17px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Главные заголовки внутренних разделов */
+
+  .section-heading,
+  .section-title,
+  .studio-title,
+  .services-title,
+  .process-title,
+  .visual-direction-title,
+  .brief-title,
+  .recommendation-title,
+  .contact-title,
+  .confirmation-title {
+    font-size: clamp(38px, 11vw, 46px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  /* Заголовки проектов */
+
+  .project-detail__title,
+  .project-detail h1 {
+    font-size: clamp(38px, 11vw, 46px) !important;
+    line-height: 1.02 !important;
+    margin-bottom: 18px !important;
+  }
+
+  /* Подзаголовки карточек и этапов */
+
+  .project-card h2,
+  .project-card h3,
+  .approach-card h3,
+  .service-card h3,
+  .process-stage h3,
+  .brief-step h2,
+  .brief-step h3,
+  .recommendation-card h2,
+  .recommendation-card h3 {
+    font-size: clamp(28px, 8.5vw, 36px) !important;
+    line-height: 1.08 !important;
+  }
+
+  /* Маленькие служебные подписи */
+
+  .eyebrow,
+  .section-index,
+  .project-detail__meta,
+  .project-meta,
+  .project-card__meta,
+  .field-label,
+  .option-label,
+  .card-index,
+  .service-card__label,
+  .recommendation-label {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .project-detail__meta span,
+  .project-meta span,
+  .project-card__meta span {
+    font-size: 12px !important;
+  }
+
+  /* Верхняя панель */
+
+  .site-logo,
+  .project-detail__brand {
+    font-size: 17px !important;
+  }
+
+  .language-switcher,
+  .language-selector,
+  .header-language,
+  [data-language-toggle] {
+    min-width: 52px !important;
+    min-height: 44px !important;
+    padding: 10px 8px !important;
+    font-size: 16px !important;
+  }
+
+  .menu-toggle {
+    min-width: 48px !important;
+    min-height: 48px !important;
+  }
+
+  .back-link,
+  .project-detail__back {
+    min-height: 44px !important;
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Кнопки */
+
+  .button,
+  .cta-button,
+  .project-detail__cta,
+  .service-card__cta,
+  .brief-navigation button,
+  .brief-navigation .button,
+  .recommendation-actions .button,
+  .contact-form button {
+    min-height: 56px !important;
+    padding: 17px 18px !important;
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Visual Direction — кнопки выбора */
+
+  .mood-option,
+  .contrast-option,
+  .material-option,
+  .visual-option,
+  .choice-option {
+    min-height: 58px;
+  }
+
+  .mood-option>span,
+  .contrast-option>span,
+  .material-option>span,
+  .visual-option>span,
+  .choice-option>span {
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Карточки с текстом */
+
+  .approach-card,
+  .brief-card,
+  .recommendation-card {
+    padding: 26px 24px !important;
+  }
+
+  /* Поля брифа */
+
+  input,
+  select,
+  textarea {
+    min-height: 52px;
+    font-size: 17px !important;
+    line-height: 1.4 !important;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+
+  label,
+  .field-label {
+    font-size: 15px !important;
+  }
+
+  /* Отступы от краёв экрана */
+
+  .project-detail__content,
+  .studio-section__inner,
+  .visual-direction-section__inner,
+  .brief-section__inner,
+  .recommendation-section__inner,
+  .contact-section__inner {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .project-detail__description,
+  .studio-copy,
+  .approach-card p,
+  .service-card p,
+  .brief-card p,
+  .recommendation-card p,
+  .visual-direction-section p {
+    color: rgba(232, 227, 218, 0.9) !important;
+  }
+
+  .visual-direction-section,
+  .brief-section,
+  .recommendation-section {
+    color: #181816;
+  }
+
+  .visual-direction-section p,
+  .brief-section p,
+  .recommendation-section p {
+    color: rgba(24, 24, 22, 0.78) !important;
   }
 }

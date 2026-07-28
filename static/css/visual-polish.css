@@ -1286,3 +1286,129 @@ label,
     line-height: 1.25 !important;
   }
 }
+
+/* ---------- Final iPhone readability system ---------- */
+
+@media (max-width: 480px) {
+
+  /* Основной текст */
+
+  body,
+  p,
+  .project-detail__description,
+  .studio-copy,
+  .approach-card p,
+  .service-card p,
+  .process-stage p,
+  .brief-section p,
+  .recommendation-section p,
+  .contact-section p,
+  .confirmation-section p {
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+    font-weight: 400;
+  }
+
+  /* Текст на тёмных экранах */
+
+  .project-detail__description,
+  .studio-copy,
+  .approach-card p,
+  .service-card p,
+  .brief-section p,
+  .brief-section label,
+  .brief-section legend,
+  .contact-section p {
+    color: rgba(232, 227, 218, 0.96) !important;
+  }
+
+  /* Вопросы брифа */
+
+  .brief-section legend,
+  .brief-question,
+  .brief-step__question {
+    font-size: 20px !important;
+    line-height: 1.45 !important;
+    font-weight: 500 !important;
+  }
+
+  /* Варианты выбора */
+
+  .brief-section .option,
+  .brief-section .option span,
+  .brief-section .choice-option,
+  .brief-section .choice-option span,
+  .brief-section .brief-option,
+  .brief-section .brief-option span {
+    font-size: 18px !important;
+    line-height: 1.45 !important;
+    font-weight: 400;
+  }
+
+  .brief-section .option,
+  .brief-section .choice-option,
+  .brief-section .brief-option {
+    min-height: 70px !important;
+    padding: 20px 22px !important;
+  }
+
+  /* Итоговые значения */
+
+  .recommendation-card__value,
+  .recommendation-result,
+  .summary-value,
+  .brief-summary__value {
+    font-size: 20px !important;
+    line-height: 1.45 !important;
+    font-weight: 500;
+  }
+
+  /* Служебные подписи */
+
+  .eyebrow,
+  .section-index,
+  .field-label,
+  .optional-label,
+  .summary-label,
+  .recommendation-card__label,
+  .brief-progress__label {
+    font-size: 14px !important;
+    line-height: 1.45 !important;
+    letter-spacing: 0.05em !important;
+    font-weight: 500;
+  }
+
+  /* Кнопки */
+
+  .button,
+  button,
+  .brief-navigation button,
+  .recommendation-section button,
+  .contact-section button {
+    min-height: 58px !important;
+    padding: 18px 20px !important;
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    font-weight: 500;
+  }
+
+  /* Поля */
+
+  input,
+  textarea,
+  select {
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Рамки и разделители */
+
+  .brief-section .option,
+  .brief-section .choice-option,
+  .brief-section .brief-option,
+  .brief-card,
+  .recommendation-card {
+    border-color: rgba(232, 227, 218, 0.32) !important;
+    border-width: 1.5px !important;
+  }
+}

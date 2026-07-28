@@ -1578,19 +1578,6 @@ label,
 
 @media (max-width: 480px) {
 
-  /* Компактная шапка сайта внутри Telegram */
-
-  .site-header,
-  .project-detail__header {
-    position: relative !important;
-    top: auto !important;
-    min-height: 88px !important;
-    height: auto !important;
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
-    background: #181816 !important;
-    z-index: 20 !important;
-  }
 
   /* Убираем лишнюю высоту внутренних контейнеров шапки */
 
@@ -1731,5 +1718,93 @@ label,
   .projects-section .section-description {
     margin-top: 0 !important;
     margin-bottom: 34px !important;
+  }
+}
+
+/* ---------- Mobile sticky navigation ---------- */
+
+@media (max-width: 480px) {
+
+  .site-header,
+  .project-detail__header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+
+    width: 100% !important;
+    min-height: 72px !important;
+    height: 72px !important;
+
+    margin: 0 !important;
+    padding: 0 28px !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    background: rgba(24, 24, 22, 0.96) !important;
+    border-bottom: 1px solid rgba(232, 227, 218, 0.14) !important;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-sizing: border-box !important;
+  }
+
+  .site-header__inner,
+  .header-inner,
+  .project-detail__header-inner {
+    width: 100% !important;
+    min-height: 72px !important;
+    height: 72px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  /* Не разрешаем внутренним элементам растягивать шапку */
+
+  .site-header .site-logo,
+  .site-header .language-switcher,
+  .site-header .language-selector,
+  .site-header .menu-toggle,
+  .project-detail__header .project-detail__brand {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .site-header .language-switcher,
+  .site-header .language-selector,
+  .site-header [data-language-toggle] {
+    min-height: 44px !important;
+    height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .site-header .menu-toggle {
+    width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 !important;
+  }
+
+  /* Якорные переходы не должны прятать начало раздела под шапкой */
+
+  section,
+  .hero,
+  .projects-section,
+  .studio-section,
+  .visual-direction-section,
+  .services-section,
+  .process-section,
+  .brief-section,
+  .recommendation-section,
+  .contact-section,
+  .confirmation-section {
+    scroll-margin-top: 88px !important;
   }
 }

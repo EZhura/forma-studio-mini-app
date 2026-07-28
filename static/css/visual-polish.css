@@ -1168,3 +1168,121 @@ label,
     color: #181816 !important;
   }
 }
+
+/* ---------- Final mobile typography: Brief, Recommendation, Contact ---------- */
+
+@media (max-width: 480px) {
+
+  /* Вопросы брифа */
+
+  .brief-section legend,
+  .brief-question,
+  .brief-step__question,
+  .brief-fieldset>label:first-child {
+    font-size: 19px !important;
+    line-height: 1.45 !important;
+    font-weight: 500;
+  }
+
+  /* Варианты ответов */
+
+  .brief-section .option,
+  .brief-section .option span,
+  .brief-section .choice-option,
+  .brief-section .choice-option span,
+  .brief-section .brief-option,
+  .brief-section .brief-option span {
+    font-size: 17px !important;
+    line-height: 1.4 !important;
+  }
+
+  .brief-section .option,
+  .brief-section .choice-option,
+  .brief-section .brief-option {
+    min-height: 66px !important;
+    padding: 18px 22px !important;
+  }
+
+  /* Маленькие инструкции */
+
+  .brief-section .field-hint,
+  .brief-section .option-hint,
+  .brief-section .required-note,
+  .brief-section .optional-label,
+  .brief-section .brief-progress__label {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  /* Заголовок шага */
+
+  .brief-section .brief-step__title,
+  .brief-section h1,
+  .brief-section h2 {
+    font-size: clamp(38px, 10vw, 46px) !important;
+    line-height: 1.04 !important;
+  }
+
+  .brief-section .brief-step__description {
+    font-size: 18px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Поля ввода */
+
+  .brief-section input,
+  .brief-section textarea,
+  .brief-section select {
+    font-size: 18px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Рекомендация */
+
+  .recommendation-section p,
+  .recommendation-summary,
+  .recommendation-card p,
+  .recommendation-details {
+    font-size: 17px !important;
+    line-height: 1.55 !important;
+  }
+
+  .recommendation-section .summary-value,
+  .recommendation-card__value,
+  .recommendation-result {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+  }
+
+  .recommendation-section .summary-label,
+  .recommendation-card__label {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  /* Итог заявки и контактная форма */
+
+  .contact-section p,
+  .contact-form label,
+  .confirmation-section p,
+  .brief-summary p {
+    font-size: 17px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Кнопки */
+
+  .brief-section button,
+  .recommendation-section button,
+  .contact-section button,
+  .brief-section .button,
+  .recommendation-section .button,
+  .contact-section .button {
+    min-height: 58px !important;
+    padding: 17px 20px !important;
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+  }
+}

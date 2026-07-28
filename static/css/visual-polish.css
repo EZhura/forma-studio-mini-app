@@ -523,3 +523,172 @@
     line-height: 1.08 !important;
   }
 }
+
+/* ---------- Project gallery alignment ---------- */
+
+.project-detail__gallery {
+  width: min(100%, 1720px);
+  margin: 0 auto;
+  padding-left: clamp(24px, 3vw, 56px);
+  padding-right: clamp(24px, 3vw, 56px);
+  gap: clamp(20px, 2.2vw, 40px);
+}
+
+.project-detail__image {
+  width: 100%;
+}
+
+/* Два средних изображения — ровная сетка */
+
+@media (min-width: 768px) {
+  .project-detail__gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-detail__image--1,
+  .project-detail__image--4 {
+    grid-column: 1 / -1;
+  }
+
+  .project-detail__image--2,
+  .project-detail__image--3 {
+    aspect-ratio: 4 / 3;
+    min-width: 0;
+  }
+
+  .project-detail__image--2 img,
+  .project-detail__image--3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Ограничиваем слишком высокие широкие изображения */
+
+@media (min-width: 1100px) {
+  .project-detail__image--1 {
+    aspect-ratio: 16 / 7;
+    max-height: 720px;
+  }
+
+  .project-detail__image--4 {
+    aspect-ratio: 16 / 7;
+    max-height: 720px;
+  }
+
+  .project-detail__image--1 img,
+  .project-detail__image--4 img {
+    object-fit: cover;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .project-detail__gallery {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 16px;
+  }
+
+  .project-detail__image--1,
+  .project-detail__image--2,
+  .project-detail__image--3,
+  .project-detail__image--4 {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---------- Project gallery: strict centered grid ---------- */
+
+.project-detail__gallery {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  width: calc(100% - 80px) !important;
+  max-width: 1680px !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  padding: 0 !important;
+  gap: 24px 48px !important;
+  box-sizing: border-box !important;
+}
+
+/* Сбрасываем старые индивидуальные размеры и смещения */
+
+.project-detail__gallery>.project-detail__image {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  justify-self: stretch !important;
+  align-self: stretch !important;
+
+  box-sizing: border-box !important;
+  overflow: hidden;
+}
+
+/* Первое и четвёртое фото — на всю ширину */
+
+.project-detail__image--1,
+.project-detail__image--4 {
+  grid-column: 1 / -1 !important;
+}
+
+/* Средняя пара — две одинаковые колонки */
+
+.project-detail__image--2 {
+  grid-column: 1 !important;
+}
+
+.project-detail__image--3 {
+  grid-column: 2 !important;
+}
+
+.project-detail__image--2,
+.project-detail__image--3 {
+  aspect-ratio: 4 / 3;
+}
+
+/* Все изображения заполняют свои ячейки */
+
+.project-detail__gallery img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  object-fit: cover;
+}
+
+/* Широкие кадры не должны быть чрезмерно высокими */
+
+.project-detail__image--1,
+.project-detail__image--4 {
+  aspect-ratio: 16 / 6;
+  max-height: 620px;
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .project-detail__gallery {
+    grid-template-columns: 1fr !important;
+    width: calc(100% - 32px) !important;
+    gap: 16px !important;
+  }
+
+  .project-detail__image--1,
+  .project-detail__image--2,
+  .project-detail__image--3,
+  .project-detail__image--4 {
+    grid-column: 1 !important;
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+}

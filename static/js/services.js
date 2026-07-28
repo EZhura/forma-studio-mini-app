@@ -1,7 +1,6 @@
 "use strict";
 
-window.formaServices = [
-  {
+window.formaServices = [{
     id: "direction",
     number: "01",
     image: "service_concept.webp",
@@ -44,7 +43,7 @@ window.formaServices = [
   {
     id: "complete-space",
     number: "02",
-    image: "casa_bruma_space.webp",
+    image: "service_complete.webp",
     translations: {
       en: {
         title: "Design the Complete Space",
@@ -124,7 +123,7 @@ window.formaServices = [
   {
     id: "review",
     number: "04",
-    image: "linha_joinery.webp",
+    image: "service_review.webp",
     translations: {
       en: {
         title: "Review an Existing Project",

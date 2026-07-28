@@ -692,3 +692,229 @@
     max-height: none;
   }
 }
+
+/* ---------- Mobile hero typography ---------- */
+
+@media (max-width: 720px) {
+  .hero__main h1 {
+    max-width: 100%;
+    font-size: clamp(40px, 11.5vw, 48px) !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .hero__description {
+    max-width: 100%;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+    color: rgba(232, 227, 218, 0.92);
+  }
+
+  .hero__intro .eyebrow {
+    max-width: 220px;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    letter-spacing: 0.14em;
+  }
+
+  .hero__actions .button {
+    min-height: 54px;
+    padding: 16px 18px;
+    font-size: 13px !important;
+    line-height: 1.25;
+  }
+
+  .hero__scroll,
+  .hero__footer {
+    font-size: 11px !important;
+    letter-spacing: 0.08em;
+  }
+
+  .hero__overlay {
+    background:
+      linear-gradient(to bottom,
+        rgba(24, 24, 22, 0.18) 0%,
+        rgba(24, 24, 22, 0.34) 42%,
+        rgba(24, 24, 22, 0.72) 100%);
+  }
+}
+
+/* ---------- Global mobile readability ---------- */
+
+@media (max-width: 720px) {
+
+  /* Верхняя панель */
+
+  .site-header,
+  .project-detail__header {
+    min-height: 64px;
+  }
+
+  .site-logo,
+  .project-detail__brand {
+    font-size: 16px !important;
+    letter-spacing: 0.12em;
+  }
+
+  .language-switcher,
+  .language-selector,
+  .header-language,
+  [data-language-toggle] {
+    font-size: 15px !important;
+    line-height: 1;
+    padding: 12px 8px;
+    min-height: 44px;
+  }
+
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Служебные ссылки и кнопка назад */
+
+  .back-link,
+  .project-detail__back,
+  .section-link,
+  .eyebrow {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .project-detail__back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Заголовки внутренних экранов */
+
+  .project-detail__title,
+  .project-detail h1,
+  .section-heading,
+  .section-title,
+  .services-title,
+  .studio-title,
+  .brief-title,
+  .recommendation-title {
+    font-size: clamp(38px, 10vw, 48px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.02em;
+  }
+
+  /* Заголовки карточек и подразделов */
+
+  .project-card h2,
+  .project-card h3,
+  .service-card h3,
+  .process-stage h3,
+  .brief-step h2,
+  .brief-step h3 {
+    font-size: clamp(28px, 8vw, 38px) !important;
+    line-height: 1.06 !important;
+  }
+
+  /* Основной текст */
+
+  .project-detail__description,
+  .project-detail__intro,
+  .section-description,
+  .service-card p,
+  .studio-copy,
+  .process-stage p,
+  .brief-step p,
+  .recommendation-copy,
+  .contact-copy {
+    font-size: 16px !important;
+    line-height: 1.58 !important;
+  }
+
+  /* Метаданные проектов */
+
+  .project-detail__meta,
+  .project-meta,
+  .project-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+
+  .project-detail__meta span,
+  .project-meta span,
+  .project-card__meta span {
+    font-size: 11px !important;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+  }
+
+  /* Кнопки */
+
+  .button,
+  button,
+  .cta-button,
+  .project-detail__cta,
+  .service-card__cta,
+  .brief-navigation button {
+    min-height: 52px;
+    padding: 15px 18px;
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Поля формы */
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  label,
+  .field-label,
+  .option-label {
+    font-size: 14px !important;
+    line-height: 1.4;
+  }
+
+  /* Меню */
+
+  .menu-panel a,
+  .fullscreen-menu a,
+  .navigation-menu a {
+    font-size: clamp(26px, 8vw, 36px) !important;
+    line-height: 1.15 !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Подписи карточек Visual Direction */
+
+  .contrast-option>span,
+  .material-option>span,
+  .mood-option>span {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-detail__content {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .project-detail__title {
+    margin-top: 24px;
+    margin-bottom: 18px;
+  }
+
+  .project-detail__description {
+    margin-bottom: 32px;
+  }
+
+  .project-detail__gallery {
+    width: calc(100% - 24px) !important;
+  }
+}

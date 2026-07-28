@@ -1688,3 +1688,48 @@ label,
     border-color: rgba(24, 24, 22, 0.26) !important;
   }
 }
+
+/* ---------- Mobile: reduce gap before Selected Work ---------- */
+
+@media (max-width: 480px) {
+
+  /* Нижняя часть первого экрана */
+
+  .hero {
+    min-height: auto !important;
+    padding-bottom: 32px !important;
+  }
+
+  .hero__footer {
+    margin-top: 28px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Начало блока проектов */
+
+  .projects-section {
+    padding-top: 48px !important;
+  }
+
+  .projects-section .section-header,
+  .projects-section .section-intro {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .projects-section .section-index,
+  .projects-section .eyebrow {
+    margin-bottom: 20px !important;
+  }
+
+  .projects-section .section-heading,
+  .projects-section .section-title {
+    margin-top: 0 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .projects-section .section-description {
+    margin-top: 0 !important;
+    margin-bottom: 34px !important;
+  }
+}

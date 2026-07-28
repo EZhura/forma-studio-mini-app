@@ -1,17 +1,9 @@
-FORMA replacement images package
+FORMA Studio — Apartamento Linha image replacements
 
-Files included:
-- hero_main.webp
+Replace the following files in static/images:
 - linha_cover.webp
 - linha_space.webp
 - linha_joinery.webp
 - linha_detail.webp
-- atelier_cover.webp
-- service_complete.webp
-- service_review.webp
 
-Notes:
-- hero_main.webp replaces the homepage hero image
-- linha_*.webp is a coherent new series for Apartamento Linha
-- atelier_cover.webp replaces the Atelier Norte cover image
-- service_complete.webp and service_review.webp are new standalone service images
+The filenames already match the references used in the project code.
